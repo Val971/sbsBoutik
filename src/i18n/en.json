@@ -1,0 +1,64 @@
+{
+    "home-page":{
+        "navigation":{
+            "home":"Home",
+            "services":"Services",
+            "about":"About Us",
+            "contact":"Contact Us"
+          },
+        "heroSection1":{
+            "sub":"Empower Your Office",
+            "title":" with Cutting-Edge Technology",
+            "description":"Say goodbye to outdated equipment and hello to a more productive, efficient workplace. Our wide range of technology products will take your office to the next level.",
+            "description2":"",
+            "btnText":"Show more"
+        },
+        "aboutSection":{
+            "title":"About Us",
+            "description":"We're a team of tech enthusiasts and office supply lovers who are passionate about making the workplace more efficient and enjoyable.",
+            "description2":"We understand that technology is changing the way we work, and we're dedicated to bringing the latest and greatest products to market to help you stay ahead of the curve.",
+            "btnText":"Contact us"
+        },
+        "servicesSection": {
+            "sub":"Our Services",
+            "title":"All Essentials You Need",
+            "card1": {
+              "title": "Print services",
+              "description": "High-quality document printing available when you need it from the experts at our Print & Marketing Centres."
+            },
+            "card2": {
+              "title": "Office Supplies",
+              "description": "Shop the best office suppliers, staionery & desk organizers. No matter where you’re working from, find solutions like filing folders, rulers, scissors, writing utensils and more."
+            },
+            "card3": {
+              "title": "Cyber internet",
+              "description": "WE allow an 'GUEST' internet Wi-Fi Wireless WAN Access. Thy type of services allows customers to connect to their various services directly in store."
+            },
+            "card4": {
+              "title": "Printer INK + Toner Cartridges",
+              "description": "Sainte-Anne Bureautique has the printer ink and toner cartridges you need so you never have to worry about your printers running dry. Let us help you find the right ink cartridge or toner for your printer"
+            },
+            "card5": {
+              "title": "Laptop",
+              "description": "Shop our biggest laptop deals & sales of the year!",
+              "btntext": "SHOW MORE"
+            }
+          },
+        "actionSection1":{
+            "title":"About Us",
+            "description":"We're more than just a shop for office supplies.",
+            "description2":"We offer a range of services to help you optimize your workspace and increase productivity."
+        },
+        "actionSection2":{
+            "title":"Revolutionizing the Way You Work",
+            "description":"Say goodbye to cluttered desk and endless hours of searching for lost office supplies. Our innovative products and cutting-edge technology make organizing and optimizing your workspace effortless."
+        },
+        "contactSection":{
+            "title":"Get in Touch",
+            "description":"We are always ready to help you. If you have any questions or concerns about our products, services or the ordering process, please feel free to contact us.",
+            "name":"Name",
+            "email":"Email",
+            "message":"Message"
+        }
+    }
+}

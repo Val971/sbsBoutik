@@ -1,0 +1,64 @@
+{
+    "home-page":{
+      "navigation":{
+        "home":"Accueil",
+        "services":"Services",
+        "about":"À propos",
+        "contact":"Contacts"
+      },
+        "heroSection1":{
+            "sub":"Offrez à votre bureau ",
+            "title":"une technologie de pointe",
+            "description":"Dites adieu aux équipements obsolètes et bonjour à un lieu de travail plus productif et efficace. Notre large gamme de produits technologiques fera passer votre bureau au niveau supérieur.",
+            "description2":"",
+            "btnText":"Voir plus"
+        },
+        "aboutSection":{
+            "title":"À propos de nous",
+            "description":"Nous sommes une équipe de passionnés de technologie et d'amateurs de fournitures de bureau qui se passionnent pour rendre le lieu de travail plus efficace et agréable.",
+            "description2":"Nous comprenons que la technologie change notre façon de travailler et nous nous engageons à mettre sur le marché les produits les plus récents et les meilleurs pour vous aider à garder une longueur d'avance.",
+            "btnText":"Nous contacter"
+        },
+        "servicesSection": {
+            "sub":"Nos Services",
+            "title":"Tous les essentiels dont vous avez besoin",
+            "card1": {
+              "title": "Impression",
+              "description": "Diminuez significativement vos coûts d'impression tout en augmentant votre productivité grâce à notre gamme de photocopieurs multifonctions de haute qualité offerte dans nos centres d'impression."
+            },
+            "card2": {
+              "title": "Papeterie",
+              "description": "Découvrez les meilleurs fournitures de bureau, la papeterie et les range-tout de bureau."
+            },
+            "card3": {
+              "title": "Cyber internet",
+              "description": " Nous mettons a votre disposition un accès WAN sans fil Wi-Fi Internet «invité». Ce type de service permet aux clients de ce connecter à leur différents services directement en boutique."
+            },
+            "card4": {
+              "title": "Cartouches d'encre",
+              "description": "Sainte-Anne Bureautique Services dispose des cartouches d’encre et de toner dont vous avez besoin. Ne manquez plus jamais d’encre ou de toner ! Laissez-nous vous aider à trouver la bonne cartouche d’encre ou de toner pour votre imprimante."
+            },
+            "card5": {
+              "title": "Informatique",
+              "description": "Venez découvrir nos plus grande soldes et aubaies de l'anné sur les ordinateurs portable! Explorez les ordinateurs portable de jeu, 2 en 1 et Windows des meilleures marques.",
+              "btntext": "Voir plus"
+            }
+          },
+        "actionSection":{
+            "title":"Révolutionner votre façon de travailler",
+            "description":"Dites adieu au bureau encombré et aux heures interminables de recherche de fournitures de bureau perdues. Nos produits innovants et notre technologie de pointe facilitent l'organisation et l'optimisation de votre espace de travail."
+        },
+        "actionSection1":{
+            "title":"À propos de nous ",
+            "description":"Nous sommes plus qu'un simple magasin de fournitures de bureau.",
+            "description2":"Nous proposons une gamme de services pour vous aider à optimiser votre espace de travail et à accroître votre productivité."
+        },
+        "contactSection":{
+            "title":"Get in touch",
+            "description":"Nous sommes toujours là pour vous aider. Si vous avez des questions ou des préoccupations concernant nos produits, nos services ou le processus de commande, n'hésitez pas à nous contacter.",
+            "name":"Nom",
+            "email":"Courriel",
+            "message":"Message"
+        }
+    }
+}

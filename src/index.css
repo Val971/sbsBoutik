@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body{
+    font-family: "Heebo", sans-serif;
+  }
+  h1,h2{
+    font-family: "Fira Sans", sans-serif;
+  }
+  .active {
+    background-image: linear-gradient(
+      to right,
+      #C1121F,
+      #C1121F 50%,
+      #000 50%
+    );
+    background-size: 200% 100%;
+    background-position: 0%!important;
+    display: inline-block;
+    padding: 5px 0;
+    position: relative;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .navLink {
+    background-image: linear-gradient(
+      to right,
+      #C1121F,
+      #C1121F 50%,
+      #000 50%
+    );
+    background-size: 200% 100%;
+    background-position: -100%;
+    display: inline-block;
+    padding: 5px 0;
+    position: relative;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.3s ease-in-out;
+  }
+  .navLink:before{
+    content: '';
+    background: #C1121F;
+    display: block;
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    transition: all 0.3s ease-in-out;
+  }
+  .navLink:hover {
+    background-position: 0;
+   }
+   
+   .navLink:hover::before{
+     width: 100%;
+   }
+}
