@@ -1,5 +1,6 @@
 ---
 import ContactCard from './ContactCard.astro'
+import { OPENING_HOURS } from '../config/contact'
 
 const columns = [
   {
@@ -53,6 +54,17 @@ const columns = [
           </div>
         ))}
       </nav>
+      <section class="hours" aria-labelledby="footer-hours">
+  <h2 id="footer-hours">Horaires d'ouverture</h2>
+  <dl>
+    {OPENING_HOURS.map((h) => (
+      <div class:list={['hours-row', { closed: h.slots.length === 0 }]}>
+        <dt>{h.days}</dt>
+        <dd>{h.slots.length ? h.slots.join(' · ') : 'Fermé'}</dd>
+      </div>
+    ))}
+  </dl>
+</section>
     </div>
 
     <div class="side">
@@ -134,6 +146,39 @@ const columns = [
   .cols a:hover {
     color: var(--primary);
   }
+  .hours {
+  max-width: 520px;
+}
+.hours dl {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  overflow: hidden;
+}
+.hours-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 16px;
+  padding: 12px 16px;
+  font-size: 15px;
+}
+.hours-row + .hours-row {
+  border-top: 1px solid var(--border);
+}
+.hours dt {
+  font-weight: 600;
+  color: var(--dark);
+}
+.hours dd {
+  margin: 0;
+  color: var(--text);
+}
+.hours-row.closed dd {
+  color: var(--muted);
+}
   .bottom {
     display: flex;
     flex-direction: column;
