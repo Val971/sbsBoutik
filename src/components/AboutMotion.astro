@@ -1,0 +1,384 @@
+---
+const svg = (body, size = 18) => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`
+
+const icons = {
+  check: svg('<path d="M20 6 9 17l-5-5"/>', 14),
+  clock: svg('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'),
+  shield: svg('<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>'),
+}
+
+const rows = [
+  { label: 'Expertise bureautique', meta: '20 ans' },
+  { label: 'Prise en charge rapide', meta: '< 24h' },
+  { label: 'Contrôle qualité', meta: '100 %' },
+]
+---
+
+<div class="am-stage" aria-hidden="true">
+  <div class="am-blob am-blob-red"></div>
+  <div class="am-blob am-blob-teal"></div>
+
+  <div class="am-card">
+    <div class="am-head">
+      <img src="/logoSbs2020.png" alt="" width="36" height="36" />
+      <div>
+        <strong>Votre demande</strong>
+        <small>Suivi SBS en temps réel</small>
+      </div>
+      <span class="am-live"></span>
+    </div>
+
+    <ul class="am-list">
+      {rows.map((r, i) => (
+        <li class={`am-row am-row-${i + 1}`}>
+          <span class="am-tick" set:html={icons.check}></span>
+          <span class="am-label">{r.label}</span>
+          <span class="am-meta">{r.meta}</span>
+        </li>
+      ))}
+    </ul>
+
+    <div class="am-progress"><span></span></div>
+    <p class="am-done">Demande traitée avec succès</p>
+  </div>
+
+  <div class="am-gauge">
+    <svg width="120" height="120" viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="50" class="am-gauge-track" />
+      <circle cx="60" cy="60" r="50" class="am-gauge-fill" />
+    </svg>
+    <div class="am-gauge-text">
+      <strong>20+</strong>
+      <small>ans</small>
+    </div>
+  </div>
+
+  <div class="am-chip am-chip-fast">
+    <span class="am-chip-icon teal" set:html={icons.clock}></span>
+    <span><strong>Réactif</strong><small>Réponse sous 24h</small></span>
+  </div>
+  <div class="am-chip am-chip-quality">
+    <span class="am-chip-icon red" set:html={icons.shield}></span>
+    <span><strong>Garantie</strong><small>sur tous nos services</small></span>
+  </div>
+
+  <span class="am-spark s1"></span>
+  <span class="am-spark s2"></span>
+  <span class="am-spark s3"></span>
+</div>
+
+<style>
+  .am-stage {
+    position: relative;
+    width: min(480px, 88vw);
+    aspect-ratio: 1 / 0.95;
+    margin-inline: auto;
+    font-family: var(--font);
+  }
+
+  .am-blob {
+    position: absolute;
+    filter: blur(2px);
+    opacity: 0.9;
+    animation: am-morph 12s ease-in-out infinite;
+  }
+  .am-blob-red {
+    width: 62%;
+    height: 62%;
+    top: 4%;
+    right: 2%;
+    background: linear-gradient(135deg, rgba(224, 69, 88, 0.22), rgba(196, 30, 58, 0.08));
+  }
+  .am-blob-teal {
+    width: 50%;
+    height: 50%;
+    bottom: 2%;
+    left: 0;
+    background: linear-gradient(135deg, rgba(42, 140, 173, 0.22), rgba(27, 94, 117, 0.06));
+    animation-delay: -6s;
+    animation-duration: 14s;
+  }
+
+  .am-card {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    width: 68%;
+    padding: 20px;
+    background: var(--white);
+    border-radius: 22px;
+    box-shadow: 0 30px 60px rgba(26, 26, 26, 0.12);
+    animation: am-float-card 7s ease-in-out infinite;
+  }
+  .am-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid #eef0f4;
+  }
+  .am-head img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+  }
+  .am-head strong {
+    display: block;
+    font-size: 14px;
+    color: var(--dark);
+  }
+  .am-head small {
+    font-size: 11px;
+    color: #8a8ba0;
+  }
+  .am-live {
+    margin-left: auto;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5);
+    animation: am-live 1.8s ease-out infinite;
+  }
+
+  .am-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .am-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    border-radius: 12px;
+    background: #f6f7fa;
+    font-size: 13px;
+    animation: am-row 6s ease-in-out infinite;
+  }
+  .am-tick {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid #d4d7e0;
+    color: transparent;
+    animation: am-tick 6s ease-in-out infinite;
+  }
+  .am-tick :global(svg) {
+    width: 13px;
+    height: 13px;
+  }
+  .am-label {
+    color: var(--dark);
+    font-weight: 500;
+  }
+  .am-meta {
+    margin-left: auto;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--secondary);
+  }
+  .am-row-2, .am-row-2 .am-tick { animation-delay: 0.9s; }
+  .am-row-3, .am-row-3 .am-tick { animation-delay: 1.8s; }
+
+  .am-progress {
+    height: 6px;
+    margin-top: 16px;
+    border-radius: 999px;
+    background: #eef0f4;
+    overflow: hidden;
+  }
+  .am-progress span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--secondary), var(--primary));
+    transform-origin: left;
+    animation: am-progress 6s ease-in-out infinite;
+  }
+  .am-done {
+    margin: 10px 0 0;
+    font-size: 11px;
+    font-weight: 600;
+    color: #16a34a;
+    animation: am-done 6s ease-in-out infinite;
+  }
+
+  .am-gauge {
+    position: absolute;
+    top: 0;
+    left: 2%;
+    width: 120px;
+    height: 120px;
+    display: grid;
+    place-items: center;
+    background: var(--white);
+    border-radius: 50%;
+    box-shadow: 0 18px 40px rgba(196, 30, 58, 0.18);
+    animation: am-float 6s ease-in-out -2s infinite;
+  }
+  .am-gauge svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    rotate: -90deg;
+  }
+  .am-gauge-track {
+    fill: none;
+    stroke: #f1e3e6;
+    stroke-width: 8;
+  }
+  .am-gauge-fill {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 314;
+    stroke-dashoffset: 314;
+    animation: am-gauge 6s ease-in-out infinite;
+  }
+  .am-gauge-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1;
+  }
+  .am-gauge-text strong {
+    font-size: 30px;
+    color: var(--primary);
+  }
+  .am-gauge-text small {
+    margin-top: 4px;
+    font-size: 12px;
+    color: #8a8ba0;
+  }
+
+  .am-chip {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 14px 9px 9px;
+    background: var(--white);
+    border-radius: 14px;
+    box-shadow: 0 14px 30px rgba(26, 26, 26, 0.12);
+    white-space: nowrap;
+  }
+  .am-chip > span:last-child {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+  .am-chip strong {
+    font-size: 13px;
+    color: var(--dark);
+  }
+  .am-chip small {
+    font-size: 11px;
+    color: #8a8ba0;
+  }
+  .am-chip-icon {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    color: var(--white);
+  }
+  .am-chip-icon.red { background: linear-gradient(135deg, #E04558, var(--primary)); }
+  .am-chip-icon.teal { background: linear-gradient(135deg, #2A8CAD, var(--secondary)); }
+  .am-chip-fast {
+    top: 8%;
+    right: 0;
+    animation: am-float 5s ease-in-out -1s infinite;
+  }
+  .am-chip-quality {
+    bottom: 2%;
+    right: 6%;
+    animation: am-float 5.5s ease-in-out -3s infinite;
+  }
+
+  .am-spark {
+    position: absolute;
+    border-radius: 50%;
+    animation: am-twinkle 3s ease-in-out infinite;
+  }
+  .am-spark.s1 { width: 10px; height: 10px; background: var(--primary); left: 8%; bottom: 22%; }
+  .am-spark.s2 { width: 7px; height: 7px; background: var(--secondary); right: 14%; top: 34%; animation-delay: 1s; }
+  .am-spark.s3 { width: 6px; height: 6px; background: var(--primary); left: 40%; top: 4%; animation-delay: 2s; }
+
+  @keyframes am-morph {
+    0%, 100% { border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%; rotate: 0deg; }
+    33% { border-radius: 63% 37% 41% 59% / 55% 62% 38% 45%; rotate: 20deg; }
+    66% { border-radius: 38% 62% 55% 45% / 63% 38% 62% 37%; rotate: -12deg; }
+  }
+  @keyframes am-float {
+    0%, 100% { translate: 0 0; }
+    50% { translate: 0 -10px; }
+  }
+  @keyframes am-float-card {
+    0%, 100% { translate: -50% -50%; }
+    50% { translate: -50% calc(-50% - 8px); }
+  }
+  @keyframes am-live {
+    0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5); }
+    100% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+  }
+  @keyframes am-row {
+    0%, 10% { background: #f6f7fa; }
+    20%, 85% { background: rgba(27, 94, 117, 0.07); }
+    100% { background: #f6f7fa; }
+  }
+  @keyframes am-tick {
+    0%, 10% { background: transparent; border-color: #d4d7e0; color: transparent; scale: 1; }
+    16% { background: var(--primary); border-color: var(--primary); color: #fff; scale: 1.25; }
+    22%, 88% { background: var(--primary); border-color: var(--primary); color: #fff; scale: 1; }
+    100% { background: transparent; border-color: #d4d7e0; color: transparent; scale: 1; }
+  }
+  @keyframes am-progress {
+    0% { scale: 0 1; }
+    55%, 88% { scale: 1 1; }
+    100% { scale: 0 1; }
+  }
+  @keyframes am-done {
+    0%, 52% { opacity: 0; translate: 0 4px; }
+    60%, 88% { opacity: 1; translate: 0 0; }
+    100% { opacity: 0; }
+  }
+  @keyframes am-gauge {
+    0% { stroke-dashoffset: 314; }
+    50%, 88% { stroke-dashoffset: 40; }
+    100% { stroke-dashoffset: 314; }
+  }
+  @keyframes am-twinkle {
+    0%, 100% { opacity: 0.3; scale: 0.8; }
+    50% { opacity: 1; scale: 1.2; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .am-stage,
+    .am-stage * {
+      animation: none !important;
+    }
+    .am-tick { background: var(--primary); border-color: var(--primary); color: #fff; }
+    .am-gauge-fill { stroke-dashoffset: 40; }
+  }
+
+  @media (max-width: 600px) {
+    .am-card { width: 78%; padding: 16px; }
+    .am-row { font-size: 12px; }
+    .am-gauge { width: 92px; height: 92px; }
+    .am-gauge-text strong { font-size: 22px; }
+    .am-chip small { display: none; }
+  }
+</style>

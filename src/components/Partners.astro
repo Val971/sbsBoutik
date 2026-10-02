@@ -1,0 +1,522 @@
+---
+const svg = (body, size = 18) => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`
+const check = svg('<path d="M20 6 9 17l-5-5"/>', 13)
+const pin = svg('<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/>', 15)
+
+const nickelPerks = [
+  'Ouverture de compte en boutique',
+  'Carte bancaire et RIB remis sur place',
+  'Dépôts et retraits d\'espèces',
+]
+const yemPerks = [
+  'Aide à l\'installation de l\'application',
+  'Opérations accompagnées en boutique',
+  'Transactions sécurisées',
+]
+---
+
+<section id="partenaires" class="partners">
+  <div class="container">
+    <div class="head reveal">
+      <span class="eyebrow">Services financiers</span>
+      <h2 class="section-title">Nickel et YEM Pay, <span>chez SBS</span></h2>
+      <p class="section-lead">À Sainte-Anne, notre équipe vous accueille pour vos opérations Nickel et YEM Pay, avec un conseiller à vos côtés.</p>
+    </div>
+
+    <div class="bands">
+    <article id="partenaire-nickel" class="band nickel reveal">
+      <div class="band-content">
+        <img class="nickel-logo" src="/images/partners/nickel-logo.png" alt="Nickel – Compte pour tous" width="120" height="120" loading="lazy" />
+        <span class="pill">Point Nickel à Sainte-Anne</span>
+        <h3>Votre compte Nickel,<br />ouvert chez SBS</h3>
+        <p class="desc">Venez à la boutique pour ouvrir votre compte Nickel, déposer ou retirer des espèces et gérer votre carte. Simple, rapide, accompagné.</p>
+        <ul class="perks">
+          {nickelPerks.map((p) => <li><span class="tick" set:html={check}></span>{p}</li>)}
+        </ul>
+        <div class="actions">
+          <a href="#contact" class="btn nickel-btn">Ouvrir mon compte <span aria-hidden="true">→</span></a>
+          <span class="where"><span set:html={pin}></span>Boutique SBS, Sainte-Anne</span>
+        </div>
+      </div>
+
+      <div class="band-visual nickel-visual" aria-hidden="true">
+        <div class="nickel-panel">
+          <span class="nickel-ring r1"></span>
+          <span class="nickel-ring r2"></span>
+          <img src="/images/partners/nickel-illustration.png" alt="" width="367" height="544" loading="lazy" />
+        </div>
+        <div class="float-badge nb-1">
+          <span class="fb-icon orange" set:html={check}></span>
+          <span><strong>Compte pour tous</strong><small>Ouvert en boutique</small></span>
+        </div>
+        <div class="float-badge nb-2">
+          <strong class="big">€</strong>
+          <span><strong>Dépôt d'espèces</strong><small>Au comptoir SBS</small></span>
+        </div>
+      </div>
+    </article>
+
+    <article id="partenaire-yempay" class="band yempay reveal" style="--delay: 120ms">
+      <div class="band-visual yem-visual" aria-hidden="true">
+        <span class="coin c1">€</span>
+        <span class="coin c2">€</span>
+        <span class="coin c3">€</span>
+        <span class="coin c4">€</span>
+
+        <div class="phone">
+          <span class="notch"></span>
+          <div class="screen">
+            <div class="yem-bag">
+              <svg viewBox="0 0 64 72" width="64" height="72" fill="none">
+                <defs>
+                  <linearGradient id="yemGold" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#FFD84D" />
+                    <stop offset="1" stop-color="#F59E0B" />
+                  </linearGradient>
+                </defs>
+                <path d="M22 14c-3-4-2-9 2-10 3-1 5 2 8 2s5-3 8-2c4 1 5 6 2 10" stroke="url(#yemGold)" stroke-width="3.5" stroke-linecap="round" />
+                <rect x="20" y="14" width="24" height="7" rx="3.5" stroke="url(#yemGold)" stroke-width="3.5" />
+                <path d="M21 21C10 30 5 41 6 52c1 11 10 16 26 16s25-5 26-16c1-11-4-22-15-31" stroke="url(#yemGold)" stroke-width="3.5" stroke-linecap="round" />
+                <path d="M25 35l7 9 7-9M32 44v14M26 48h12M26 53h12" stroke="url(#yemGold)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+            <span class="balance-label">Paiement</span>
+            <span class="balance">45,00 €</span>
+            <span class="toast"><span set:html={check}></span>Paiement validé</span>
+            <span class="row"></span>
+            <span class="row short"></span>
+          </div>
+        </div>
+
+        <div class="float-badge yb-1">
+          <span class="fb-icon gold" set:html={svg('<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/>', 18)}></span>
+          <span><strong>100 % mobile</strong><small>Depuis votre téléphone</small></span>
+        </div>
+      </div>
+
+      <div class="band-content">
+        <img class="yem-logo" src="/images/partners/yempay-logo-crop.jpg" alt="YEM Pay" width="320" height="135" loading="lazy" />
+        <span class="pill">Point YEM Pay à Sainte-Anne</span>
+        <h3>Payez et transférez<br />avec <span class="gold-text">YEM Pay</span></h3>
+        <p class="desc">SBS est votre point YEM Pay : nous vous aidons à installer l'application, effectuer vos opérations et réaliser vos paiements en toute sécurité.</p>
+        <ul class="perks">
+          {yemPerks.map((p) => <li><span class="tick" set:html={check}></span>{p}</li>)}
+        </ul>
+        <div class="actions">
+          <a href="#contact" class="btn yem-btn">En savoir plus <span aria-hidden="true">→</span></a>
+          <span class="where"><span set:html={pin}></span>Boutique SBS, Sainte-Anne</span>
+        </div>
+      </div>
+    </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .partners {
+    padding-block: 96px;
+    background: var(--white);
+  }
+  .head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    max-width: 680px;
+    margin: 0 auto 56px;
+    text-align: center;
+  }
+
+  /* ---------- Shared band layout ---------- */
+  .bands {
+    display: grid;
+    gap: 28px;
+  }
+  .band {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 40px 28px;
+    border-radius: 36px;
+  }
+  .band-content {
+    order: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+  .band-visual {
+    order: 2;
+  }
+  .pill {
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-radius: 999px;
+  }
+  .band h3 {
+    font-size: clamp(28px, 2.6vw, 38px);
+    line-height: 1.08;
+    font-weight: 800;
+  }
+  .desc {
+    max-width: 480px;
+    font-size: 17px;
+    line-height: 1.55;
+  }
+  .perks {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .perks li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .tick {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px 22px;
+    margin-top: 8px;
+  }
+  .where {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .band-visual {
+    position: relative;
+    min-height: 360px;
+    margin-top: auto;
+    display: grid;
+    place-items: center;
+  }
+
+  .float-badge {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px 10px 10px;
+    border-radius: 16px;
+    background: var(--white);
+    color: var(--dark);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+    white-space: nowrap;
+    animation: bob 5s ease-in-out infinite;
+  }
+  .float-badge > span:last-child {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+  .float-badge strong {
+    font-size: 13px;
+  }
+  .float-badge small {
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .fb-icon {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+  }
+
+  /* ---------- NICKEL ---------- */
+  .nickel {
+    background:
+      radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.18), transparent 40%),
+      radial-gradient(circle at 0% 100%, rgba(0, 0, 0, 0.12), transparent 50%),
+      var(--nickel);
+    color: var(--white);
+    box-shadow: 0 40px 80px rgba(255, 95, 0, 0.25);
+  }
+  .nickel-logo {
+    width: 96px;
+    height: 96px;
+    border-radius: 22px;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35);
+  }
+  .nickel .pill {
+    background: rgba(0, 0, 0, 0.16);
+  }
+  .nickel .desc {
+    color: rgba(255, 255, 255, 0.92);
+  }
+  .nickel .tick {
+    background: var(--white);
+    color: var(--nickel);
+  }
+  .nickel-btn {
+    background: var(--white);
+    color: var(--nickel);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+  }
+  .nickel-btn:hover {
+    background: #1a1a1a;
+    color: var(--white);
+  }
+  .nickel-panel {
+    position: relative;
+    display: grid;
+    place-items: end center;
+    width: min(360px, 100%);
+    aspect-ratio: 0.85;
+    padding-top: 24px;
+    border-radius: 32px;
+    background: var(--white);
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.18);
+  }
+  .nickel-panel img {
+    position: relative;
+    width: 74%;
+    height: auto;
+    animation: lean 6s ease-in-out infinite;
+    transform-origin: bottom center;
+  }
+  .nickel-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px dashed rgba(255, 95, 0, 0.25);
+  }
+  .nickel-ring.r1 { width: 140%; aspect-ratio: 1; left: -20%; top: 30%; animation: spin 40s linear infinite; }
+  .nickel-ring.r2 { width: 90%; aspect-ratio: 1; left: 5%; top: 45%; border-style: solid; border-color: rgba(255, 95, 0, 0.12); }
+  .fb-icon.orange { background: var(--nickel); color: var(--white); }
+  .nb-1 { top: 8%; left: 0; animation-delay: -1s; }
+  .nb-2 { bottom: 10%; right: 0; animation-delay: -3s; }
+  .nb-2 .big {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    font-size: 18px;
+    color: var(--white);
+    background: #1a1a1a;
+  }
+
+  /* ---------- YEM PAY ---------- */
+  .yempay {
+    background:
+      radial-gradient(circle at 15% 15%, rgba(255, 194, 26, 0.16), transparent 40%),
+      radial-gradient(circle at 100% 100%, rgba(255, 194, 26, 0.1), transparent 45%),
+      var(--yempay-bg);
+    color: var(--white);
+    box-shadow: 0 40px 80px rgba(25, 26, 46, 0.35);
+  }
+  .yem-logo {
+    width: 220px;
+    height: auto;
+    border-radius: 14px;
+  }
+  .yempay .pill {
+    color: var(--yempay-bg);
+    background: linear-gradient(90deg, #FFD84D, var(--yempay-gold-dark));
+  }
+  .gold-text {
+    background: linear-gradient(90deg, #FFD84D, var(--yempay-gold-dark));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .yempay .desc {
+    color: rgba(255, 255, 255, 0.78);
+  }
+  .yempay .tick {
+    background: linear-gradient(135deg, #FFD84D, var(--yempay-gold-dark));
+    color: var(--yempay-bg);
+  }
+  .yem-btn {
+    background: linear-gradient(90deg, #FFD84D, var(--yempay-gold-dark));
+    color: var(--yempay-bg);
+    box-shadow: 0 12px 28px rgba(245, 158, 11, 0.3);
+  }
+  .yem-btn:hover {
+    box-shadow: 0 16px 34px rgba(245, 158, 11, 0.45);
+  }
+  .yempay .where {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .phone {
+    position: relative;
+    width: 210px;
+    height: 400px;
+    padding: 12px;
+    border-radius: 38px;
+    background: #0d0e1c;
+    border: 2px solid rgba(255, 194, 26, 0.35);
+    box-shadow:
+      0 40px 80px rgba(0, 0, 0, 0.45),
+      0 0 60px rgba(255, 194, 26, 0.15);
+    rotate: -6deg;
+    animation: bob 6s ease-in-out infinite;
+  }
+  .notch {
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    translate: -50% 0;
+    z-index: 2;
+    width: 60px;
+    height: 16px;
+    border-radius: 10px;
+    background: #0d0e1c;
+  }
+  .screen {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 44px 16px 16px;
+    border-radius: 28px;
+    background: linear-gradient(180deg, #23254a 0%, var(--yempay-bg) 70%);
+  }
+  .yem-bag {
+    display: grid;
+    place-items: center;
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 194, 26, 0.22), transparent 70%);
+    animation: glow 3s ease-in-out infinite;
+  }
+  .balance-label {
+    margin-top: 6px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+  }
+  .balance {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--yempay-gold);
+  }
+  .toast {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 12px;
+    color: var(--yempay-bg);
+    background: linear-gradient(90deg, #FFD84D, var(--yempay-gold-dark));
+    animation: toast 4s ease-in-out infinite;
+  }
+  .row {
+    width: 100%;
+    height: 10px;
+    margin-top: 6px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .row.short {
+    width: 64%;
+  }
+  .coin {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: 800;
+    color: #8a5a00;
+    background: radial-gradient(circle at 30% 30%, #FFE07A, #F5A70B 70%);
+    box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.15), 0 10px 24px rgba(245, 158, 11, 0.35);
+    animation: coin 5s ease-in-out infinite;
+  }
+  .c1 { top: 8%; left: 14%; }
+  .c2 { top: 20%; right: 10%; width: 36px; height: 36px; font-size: 16px; animation-delay: -1.5s; }
+  .c3 { bottom: 16%; left: 8%; width: 30px; height: 30px; font-size: 13px; animation-delay: -3s; }
+  .c4 { bottom: 6%; right: 22%; width: 40px; height: 40px; font-size: 17px; animation-delay: -2.2s; }
+  .fb-icon.gold {
+    color: var(--yempay-bg);
+    background: linear-gradient(135deg, #FFD84D, var(--yempay-gold-dark));
+  }
+  .yb-1 { bottom: 14%; right: 2%; animation-delay: -2s; }
+
+  /* ---------- Keyframes ---------- */
+  @keyframes bob {
+    0%, 100% { translate: 0 0; }
+    50% { translate: 0 -10px; }
+  }
+  @keyframes spin {
+    to { rotate: 360deg; }
+  }
+  @keyframes lean {
+    0%, 100% { rotate: 0deg; }
+    50% { rotate: -1.5deg; }
+  }
+  @keyframes coin {
+    0%, 100% { translate: 0 0; rotate: 0deg; }
+    50% { translate: 0 -16px; rotate: 18deg; }
+  }
+  @keyframes glow {
+    0%, 100% { scale: 1; }
+    50% { scale: 1.08; }
+  }
+  @keyframes toast {
+    0%, 15% { opacity: 0; translate: 0 8px; }
+    25%, 85% { opacity: 1; translate: 0 0; }
+    100% { opacity: 0; translate: 0 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .partners * { animation: none !important; }
+  }
+
+  @media (max-width: 520px) {
+    .float-badge small { display: none; }
+    .nb-1 { left: -4px; }
+    .nb-2 { right: -4px; }
+  }
+  @media (min-width: 960px) {
+    .bands {
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+    }
+    .band {
+      padding: 48px 44px;
+    }
+    .phone {
+      width: 190px;
+      height: 360px;
+    }
+    .nickel-panel {
+      width: min(320px, 100%);
+    }
+  }
+  @media (min-width: 1100px) {
+    .partners {
+      padding-block: 120px;
+    }
+  }
+</style>

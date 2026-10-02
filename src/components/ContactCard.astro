@@ -1,0 +1,268 @@
+---
+import { EMAIL, PHONE_INTL, MAPS_URL, telHref, mailHref, whatsappHref, WHATSAPP_ICON } from '../config/contact'
+
+const svg = (body, size = 20) => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`
+
+const icons = {
+  mail: svg('<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/>'),
+  phone: svg('<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>'),
+  pin: svg('<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/>'),
+  arrow: svg('<path d="M7 17 17 7M8 7h9v9"/>', 16),
+  facebook: svg('<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>', 18),
+}
+
+const items = [
+  { icon: icons.phone, label: 'Téléphone', value: PHONE_INTL, href: telHref },
+  { icon: icons.mail, label: 'E-mail', value: EMAIL, href: mailHref('Demande d\'information – SBS') },
+  { icon: WHATSAPP_ICON, label: 'WhatsApp', value: 'Écrivez-nous', href: whatsappHref('Bonjour SBS, je souhaite avoir des informations.'), external: true, wa: true },
+  { icon: icons.pin, label: 'Boutique', value: 'Sainte-Anne, Guadeloupe', href: MAPS_URL, external: true },
+]
+
+const socials = [
+  { name: 'Facebook', icon: icons.facebook, href: '#' },
+]
+---
+
+<div class="cc">
+  <div class="cc-glow" aria-hidden="true"></div>
+
+  <div class="cc-head">
+    <div class="cc-logo">
+      <img src="/logoSbs2020.png" alt="" width="44" height="44" />
+    </div>
+    <div>
+      <h2>Contactez-nous</h2>
+      <p>Par téléphone, e-mail ou WhatsApp : on vous répond vite.</p>
+    </div>
+  </div>
+
+  <ul class="cc-list">
+    {items.map((it) => (
+      <li>
+        <a
+          href={it.href}
+          class="cc-item"
+          {...(it.external ? { target: '_blank', rel: 'noopener' } : {})}
+        >
+          <span class:list={['cc-icon', { 'cc-icon-wa': it.wa }]} set:html={it.icon}></span>
+          <span class="cc-text">
+            <small>{it.label}</small>
+            <strong>{it.value}</strong>
+          </span>
+          <span class="cc-arrow" set:html={icons.arrow}></span>
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  <div class="cc-actions">
+    <a href={telHref} class="cc-btn cc-btn-primary">Appeler</a>
+    <a href={mailHref('Demande d\'information – SBS')} class="cc-btn cc-btn-ghost">Envoyer un e-mail</a>
+  </div>
+
+  <div class="cc-foot">
+    <span>Suivez-nous</span>
+    <ul class="cc-socials">
+      {socials.map((s) => (
+        <li>
+          <a href={s.href} aria-label={s.name} title={s.name} set:html={s.icon}></a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>
+
+<style>
+  .cc {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    width: 100%;
+    padding: 28px;
+    border-radius: 28px;
+    color: var(--white);
+    background: linear-gradient(155deg, #1f1f24 0%, #26262d 55%, #3a1a22 100%);
+    box-shadow: 0 30px 60px rgba(26, 26, 26, 0.22);
+  }
+  .cc-glow {
+    position: absolute;
+    z-index: -1;
+    width: 280px;
+    height: 280px;
+    right: -90px;
+    top: -110px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196, 30, 58, 0.6), transparent 70%);
+    animation: cc-pulse 6s ease-in-out infinite;
+  }
+  .cc::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    width: 220px;
+    height: 220px;
+    left: -80px;
+    bottom: -100px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(42, 140, 173, 0.45), transparent 70%);
+  }
+
+  .cc-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .cc-logo {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: var(--white);
+  }
+  .cc-logo img {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+  }
+  .cc h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+  }
+  .cc-head p {
+    margin-top: 4px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .cc-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .cc-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+  }
+  .cc-item:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateX(4px);
+  }
+  .cc-icon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #E04558, var(--primary));
+  }
+  .cc-icon-wa {
+    background: #25D366;
+  }
+  .cc-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    line-height: 1.25;
+  }
+  .cc-text small {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: rgba(255, 255, 255, 0.55);
+  }
+  .cc-text strong {
+    font-size: 15px;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .cc-arrow {
+    display: grid;
+    margin-left: auto;
+    opacity: 0.4;
+    transition: opacity 0.25s ease, translate 0.25s ease;
+  }
+  .cc-item:hover .cc-arrow {
+    opacity: 1;
+    translate: 2px -2px;
+  }
+
+  .cc-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .cc-btn {
+    display: grid;
+    place-items: center;
+    padding: 13px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+  .cc-btn:hover {
+    transform: translateY(-2px);
+  }
+  .cc-btn-primary {
+    background: var(--primary);
+    box-shadow: 0 10px 24px rgba(196, 30, 58, 0.4);
+  }
+  .cc-btn-ghost {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  .cc-btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .cc-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.65);
+  }
+  .cc-socials {
+    display: flex;
+    gap: 8px;
+  }
+  .cc-socials a {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.08);
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .cc-socials a:hover {
+    background: var(--primary);
+    transform: translateY(-2px);
+  }
+
+  @keyframes cc-pulse {
+    0%, 100% { scale: 1; opacity: 0.8; }
+    50% { scale: 1.2; opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cc-glow { animation: none; }
+  }
+</style>

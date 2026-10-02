@@ -1,0 +1,237 @@
+---
+import { MAPS_URL } from '../config/contact'
+
+const stats = [
+  { value: '500+', label: 'Clients en Guadeloupe' },
+  { value: '20+', label: 'Ans d\'expérience' },
+]
+---
+
+<section id="zone" class="globe">
+  <div class="container grid">
+    <div class="visual reveal">
+    <figure class="storefront">
+      <img
+        src="/images/devanture-sbs-1200.webp"
+        srcset="/images/devanture-sbs-700.webp 700w, /images/devanture-sbs-1200.webp 1200w"
+        sizes="(min-width: 992px) 600px, 100vw"
+        alt="Devanture de Sainte-Anne Bureautique Services : vitrine rouge et blanche, enseigne SBS 0590 88 27 27"
+        width="1200"
+        height="477"
+        loading="lazy"
+      />
+      <figcaption class="store-chip">
+        <span class="store-dot" aria-hidden="true"></span>
+        Repérez notre vitrine rouge et blanche
+      </figcaption>
+    </figure>
+    <div class="map-wrap">
+      <iframe
+        class="map"
+        title="Carte Google Maps - Sainte-Anne Bureautique Services, Sainte-Anne, Guadeloupe"
+        src="https://www.google.com/maps?q=16.224742,-61.383377&z=16&output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen
+      ></iframe>
+      <div class="map-badge">
+        <img src="/logoSbs2020.png" alt="" width="40" height="40" />
+        <div>
+          <strong>SBS — Sainte-Anne</strong>
+          <span>Notre boutique, au cœur de la Grande-Terre</span>
+        </div>
+        <a class="map-open" href={MAPS_URL} target="_blank" rel="noopener">Itinéraire ↗</a>
+      </div>
+    </div>
+    </div>
+    <div class="content reveal" style="--delay: 120ms">
+      <span class="eyebrow">Nous trouver</span>
+      <h2 class="section-title">Au cœur de <span>Sainte-Anne</span>, au service de toute la Guadeloupe</h2>
+      <p>Depuis plus de 20 ans, SBS accompagne les entreprises et particuliers de Guadeloupe dans leurs besoins bureautiques, services financiers et numériques. Nous sommes votre partenaire de confiance pour tous vos projets.</p>
+      <dl class="stats">
+        {stats.map((s) => (
+          <div>
+            <dt class="sr-only">{s.label}</dt>
+            <dd class="value">{s.value}</dd>
+            <dd class="label" aria-hidden="true">{s.label}</dd>
+          </div>
+        ))}
+      </dl>
+      <a href="#services" class="btn btn-primary">Découvrir nos réalisations</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .globe {
+    padding-block: 96px;
+  }
+  .grid {
+    display: grid;
+    gap: 56px;
+    align-items: center;
+  }
+  .visual {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+  .storefront {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    border: 6px solid var(--white);
+    box-shadow: var(--shadow-lg);
+  }
+  .storefront img {
+    width: 100%;
+    aspect-ratio: 1200 / 477;
+    object-fit: cover;
+    border-radius: 22px;
+    transition: scale 0.6s ease;
+  }
+  .storefront:hover img {
+    scale: 1.03;
+  }
+  .store-chip {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dark);
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 999px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+  }
+  .store-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary);
+    box-shadow: 0 0 0 4px rgba(196, 30, 58, 0.2);
+  }
+  .map-wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--white);
+    box-shadow: var(--shadow-lg);
+    border: 6px solid var(--white);
+  }
+  .map {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border: 0;
+    border-radius: 22px;
+    display: block;
+  }
+  .map-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px 10px;
+  }
+  .map-badge img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+  .map-badge strong {
+    display: block;
+    font-size: 14px;
+    color: var(--dark);
+  }
+  .map-badge span {
+    font-size: 12px;
+    color: #6b6c80;
+  }
+  .map-open {
+    margin-left: auto;
+    flex-shrink: 0;
+    padding: 9px 14px;
+    background: var(--primary);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    transition: transform 0.2s ease;
+  }
+  .map-open:hover {
+    transform: translateY(-2px);
+  }
+  @media (max-width: 520px) {
+    .map {
+      aspect-ratio: 1 / 1;
+    }
+    .store-chip {
+      left: 10px;
+      bottom: 10px;
+      font-size: 12px;
+    }
+  }
+  @media (min-width: 992px) {
+    .map {
+      aspect-ratio: 16 / 9;
+    }
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  h2 {
+    max-width: 520px;
+  }
+  .content > p {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--text);
+    max-width: 480px;
+  }
+  .stats {
+    display: flex;
+    gap: 16px;
+    margin: 8px 0;
+  }
+  .stats > div {
+    padding: 18px 22px;
+    border-radius: var(--radius);
+    background: var(--light);
+    border: 1px solid var(--border);
+  }
+  dd {
+    margin: 0;
+  }
+  .value {
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--primary);
+  }
+  .label {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  @media (min-width: 992px) {
+    .globe {
+      padding-block: 120px;
+    }
+    .grid {
+      grid-template-columns: 1.15fr 1fr;
+      gap: 80px;
+    }
+  }
+</style>

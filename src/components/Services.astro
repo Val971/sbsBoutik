@@ -1,0 +1,253 @@
+---
+const services = [
+  {
+    title: 'Copies & Impression',
+    icon: 'copy',
+    description: 'Copies et impressions couleur ou noir & blanc, du format A4 au A3, avec un rendu professionnel pour tous vos documents.',
+    featured: true,
+  },
+  {
+    title: 'Réparation Ordinateurs',
+    icon: 'laptop',
+    description: 'Diagnostic et réparation de tous types d\'ordinateurs. Un service rapide et fiable pour remettre votre matériel en état.',
+  },
+  {
+    title: 'Vente Cartouches',
+    icon: 'ink',
+    description: 'Large gamme de cartouches originales et compatibles pour toutes vos imprimantes, à prix compétitifs.',
+  },
+  {
+    title: 'Papeterie',
+    icon: 'paper',
+    description: 'Papier, enveloppes, classeurs, stylos et toutes les fournitures de bureau dont vous avez besoin.',
+  },
+  {
+    title: 'Tampons Personnalisés',
+    icon: 'stamp',
+    description: 'Réalisation rapide de tampons sur mesure pour vos besoins professionnels et administratifs.',
+  },
+  {
+    title: 'Services Secrétariat',
+    icon: 'doc',
+    description: 'Dactylographie, rédaction de lettres, CV, invitations et accompagnement dans vos démarches administratives.',
+  },
+  {
+    title: 'Point Nickel',
+    brand: 'nickel',
+    logo: '/images/partners/nickel-logo.png',
+    href: '#partenaire-nickel',
+    description: 'Ouverture de compte Nickel, dépôts et retraits d\'espèces directement dans notre boutique.',
+  },
+  {
+    title: 'Services Cyber',
+    icon: 'wifi',
+    description: 'Accès Internet, impression de documents en ligne et aide à vos démarches numériques.',
+  },
+  {
+    title: 'YEM Pay',
+    brand: 'yempay',
+    logo: '/images/partners/yempay-logo-crop.jpg',
+    href: '#partenaire-yempay',
+    description: 'Paiement mobile YEM Pay : nous vous accompagnons pour vos opérations en toute sécurité.',
+  },
+]
+
+const svg = (body) => `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`
+
+const icons = {
+  copy: svg('<rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>'),
+  laptop: svg('<path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9"/><path d="M2 19.5 4 16h16l2 3.5a.5.5 0 0 1-.45.5H2.45a.5.5 0 0 1-.45-.5z"/><path d="M14.5 8.5a2 2 0 0 0-2.6 2.6L9.5 13.5l1 1 2.4-2.4a2 2 0 0 0 2.6-2.6l-1.2 1.2-1-1z"/>'),
+  ink: svg('<path d="M12 2.7 17.7 8.4a8 8 0 1 1-11.3 0z"/><path d="M9 14a3 3 0 0 0 3 3"/>'),
+  paper: svg('<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>'),
+  stamp: svg('<path d="M5 22h14"/><path d="M19.3 13.7A2.5 2.5 0 0 0 17.5 13h-11A2.5 2.5 0 0 0 4 15.5V17a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-1.5c0-.7-.3-1.3-.7-1.8z"/><path d="M14 13V8.5C14 7 15 7 15 5a3 3 0 0 0-6 0c0 2 1 2 1 3.5V13"/>'),
+  doc: svg('<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/>'),
+  wifi: svg('<path d="M5 12.6a11 11 0 0 1 14 0"/><path d="M1.4 9a16 16 0 0 1 21.2 0"/><path d="M8.5 16.1a6 6 0 0 1 7 0"/><path d="M12 20h.01"/>'),
+}
+---
+
+<section id="services" class="services">
+  <div class="container">
+    <div class="head">
+      <div class="intro reveal">
+        <span class="eyebrow">Nos services</span>
+        <h2 class="section-title">Tout pour votre bureau, <span>au même endroit</span></h2>
+      </div>
+      <div class="intro-side reveal" style="--delay: 100ms">
+        <p class="section-lead">De la simple copie aux services de secrétariat, en passant par Nickel et YEM Pay : Sainte-Anne Bureautique Services est votre partenaire du quotidien en Guadeloupe.</p>
+        <a href="#contact" class="btn btn-primary">Nous contacter</a>
+      </div>
+    </div>
+
+    <div class="grid">
+      {services.map((s, i) => (
+        <article
+          class:list={['card reveal', { featured: s.featured, [`brand-${s.brand}`]: s.brand }]}
+          style={`--delay: ${(i % 3) * 80}ms`}
+        >
+          <div class="card-head">
+            {s.logo ? (
+              <img class="brand-logo" src={s.logo} alt="" width="52" height="52" loading="lazy" />
+            ) : (
+              <div class="icon-wrapper" set:html={icons[s.icon]} />
+            )}
+            <h3>{s.title}</h3>
+          </div>
+          <p>{s.description}</p>
+          <a href={s.href ?? '#contact'} class="read">
+            {s.brand ? 'Découvrir' : 'Nous contacter'}
+            <span aria-hidden="true">→</span>
+            <span class="sr-only"> – {s.title}</span>
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    background: var(--light);
+    padding-block: 96px;
+  }
+  .head {
+    display: grid;
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+  .intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .intro-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .grid {
+    display: grid;
+    gap: 20px;
+  }
+
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 32px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow);
+    border-color: rgba(196, 30, 58, 0.25);
+  }
+  .card-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .icon-wrapper {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    color: var(--primary);
+    background: rgba(196, 30, 58, 0.08);
+    border-radius: 16px;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  }
+  .card:hover .icon-wrapper {
+    background: var(--primary);
+    color: var(--white);
+    transform: rotate(-6deg);
+  }
+  .brand-logo {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    object-fit: cover;
+    border-radius: 16px;
+    transition: transform 0.3s ease;
+  }
+  .card:hover .brand-logo {
+    transform: rotate(-6deg);
+  }
+  h3 {
+    font-size: 22px;
+    line-height: 1.2;
+  }
+  .card p {
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--text);
+  }
+  .read {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+    color: var(--primary);
+    font-size: 15px;
+    font-weight: 600;
+    transition: gap 0.2s ease;
+  }
+  .card:hover .read {
+    gap: 10px;
+  }
+
+  .featured {
+    background: var(--grad-primary);
+    border-color: transparent;
+    color: var(--white);
+    box-shadow: 0 24px 50px rgba(196, 30, 58, 0.3);
+  }
+  .featured p,
+  .featured .read {
+    color: rgba(255, 255, 255, 0.92);
+  }
+  .featured .icon-wrapper,
+  .featured:hover .icon-wrapper {
+    background: rgba(255, 255, 255, 0.18);
+    color: var(--white);
+  }
+  .featured:hover {
+    border-color: transparent;
+  }
+
+  .brand-nickel .read { color: var(--nickel); }
+  .brand-nickel:hover { border-color: var(--nickel); }
+  .brand-nickel .brand-logo { object-position: center; }
+  .brand-yempay .read { color: var(--yempay-gold-dark); }
+  .brand-yempay:hover { border-color: var(--yempay-gold-dark); }
+  .brand-yempay .brand-logo { object-fit: cover; object-position: 8% center; background: var(--yempay-bg); }
+
+  @media (min-width: 768px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 992px) {
+    .head {
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+      gap: 56px;
+    }
+  }
+  @media (min-width: 1100px) {
+    .services {
+      padding-block: 120px;
+    }
+    .grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+  }
+</style>

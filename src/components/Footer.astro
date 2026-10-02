@@ -1,0 +1,174 @@
+---
+import ContactCard from './ContactCard.astro'
+
+const columns = [
+  {
+    title: 'Navigation',
+    links: [
+      { label: 'Accueil', href: '#' },
+      { label: 'Services', href: '#services' },
+      { label: 'Nickel & YEM Pay', href: '#partenaires' },
+      { label: 'À propos', href: '#about' },
+      { label: 'Nous trouver', href: '#zone' },
+    ],
+  },
+  {
+    title: 'Services',
+    links: [
+      { label: 'Copies & Impression', href: '#services' },
+      { label: 'Réparation ordinateurs', href: '#services' },
+      { label: 'Cartouches & papeterie', href: '#services' },
+      { label: 'Tampons personnalisés', href: '#services' },
+      { label: 'Secrétariat & cyber', href: '#services' },
+    ],
+  },
+  {
+    title: 'Services financiers',
+    links: [
+      { label: 'Point Nickel', href: '#partenaire-nickel' },
+      { label: 'YEM Pay', href: '#partenaire-yempay' },
+      { label: 'Nous contacter', href: '#contact' },
+    ],
+  },
+]
+---
+
+<footer id="contact" class="footer">
+  <div class="container top">
+    <div class="brand-col">
+      <a href="/" class="brand">
+        <img src="/logoSbs2020.png" alt="" width="56" height="56" />
+        <span>
+          <strong>Sainte-Anne Bureautique Services</strong>
+          <small>Votre partenaire bureautique en Guadeloupe</small>
+        </span>
+      </a>
+      <nav class="cols" aria-label="Pied de page">
+        {columns.map((col) => (
+          <div>
+            <h2>{col.title}</h2>
+            <ul>
+              {col.links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+            </ul>
+          </div>
+        ))}
+      </nav>
+    </div>
+
+    <div class="side">
+      <ContactCard />
+    </div>
+  </div>
+
+  <div class="container bottom">
+    <p>© {new Date().getFullYear()} Sainte-Anne Bureautique Services. Tous droits réservés.</p>
+    <p class="partners-note">
+      <img src="/images/partners/nickel-logo.png" alt="Nickel" width="24" height="24" />
+      <img src="/images/partners/yempay-logo-crop.jpg" alt="YEM Pay" width="56" height="24" />
+      Services disponibles en boutique
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding-top: 96px;
+    background: var(--light);
+    border-top: 1px solid var(--border);
+  }
+  .top {
+    display: grid;
+    gap: 48px;
+    padding-bottom: 64px;
+  }
+  .brand-col {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .brand img {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+  }
+  .brand span {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.25;
+  }
+  .brand strong {
+    font-size: 17px;
+  }
+  .brand small {
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .cols {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 24px;
+  }
+  h2 {
+    margin-bottom: 18px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .cols ul {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .cols a {
+    font-size: 15px;
+    color: var(--dark);
+    transition: color 0.2s ease;
+  }
+  .cols a:hover {
+    color: var(--primary);
+  }
+  .bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-block: 28px;
+    border-top: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .partners-note {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .partners-note img {
+    height: 24px;
+    width: auto;
+    border-radius: 6px;
+  }
+
+  @media (min-width: 768px) {
+    .cols {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .bottom {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+  @media (min-width: 1100px) {
+    .top {
+      grid-template-columns: 1fr 420px;
+      gap: 64px;
+      align-items: start;
+    }
+  }
+</style>

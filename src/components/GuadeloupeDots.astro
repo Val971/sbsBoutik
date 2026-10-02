@@ -1,0 +1,114 @@
+---
+interface Props {
+  step?: number
+}
+const { step = 0.0125 } = Astro.props
+
+// Approximate coastlines as [longitude, latitude]
+const basseTerre = [
+  [-61.555, 16.265], [-61.6, 16.29], [-61.65, 16.32], [-61.7, 16.345], [-61.76, 16.36],
+  [-61.8, 16.31], [-61.795, 16.23], [-61.78, 16.13], [-61.77, 16.06], [-61.735, 15.995],
+  [-61.7, 15.95], [-61.64, 15.975], [-61.565, 16.045], [-61.57, 16.13], [-61.585, 16.19], [-61.56, 16.23],
+]
+const grandeTerre = [
+  [-61.545, 16.24], [-61.49, 16.2], [-61.43, 16.21], [-61.38, 16.215], [-61.27, 16.24],
+  [-61.18, 16.25], [-61.24, 16.29], [-61.34, 16.33], [-61.4, 16.42], [-61.46, 16.51],
+  [-61.515, 16.47], [-61.535, 16.42], [-61.49, 16.38], [-61.53, 16.33], [-61.55, 16.28],
+]
+const ellipse = (cx, cy, rx, ry, n = 24) =>
+  Array.from({ length: n }, (_, i) => {
+    const a = (i / n) * Math.PI * 2
+    return [cx + rx * Math.cos(a), cy + ry * Math.sin(a)]
+  })
+const islands = [
+  basseTerre,
+  grandeTerre,
+  ellipse(-61.27, 15.94, 0.085, 0.07),
+  ellipse(-61.6, 15.865, 0.03, 0.02),
+  ellipse(-61.06, 16.31, 0.065, 0.018),
+]
+
+const inside = ([x, y], poly) => {
+  let hit = false
+  for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+    const [xi, yi] = poly[i]
+    const [xj, yj] = poly[j]
+    if (yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) hit = !hit
+  }
+  return hit
+}
+
+const lonMin = -61.84, lonMax = -60.97, latMin = 15.82, latMax = 16.54
+const kx = 0.96
+const scale = 1000
+const project = (lon, lat) => [(lon - lonMin) * kx * scale, (latMax - lat) * scale]
+
+const dots = []
+for (let lat = latMax; lat >= latMin; lat -= step) {
+  for (let lon = lonMin; lon <= lonMax; lon += step / kx) {
+    if (islands.some((p) => inside([lon, lat], p))) dots.push(project(lon, lat))
+  }
+}
+
+const [sx, sy] = project(-61.383, 16.225)
+const width = (lonMax - lonMin) * kx * scale
+const height = (latMax - latMin) * scale
+const r = step * scale * 0.34
+---
+
+<svg class="gp-dots" viewBox={`0 0 ${width} ${height}`} role="img" aria-label="Carte de la Guadeloupe – SBS à Sainte-Anne">
+  <g class="land">
+    {dots.map(([x, y]) => <circle cx={x.toFixed(1)} cy={y.toFixed(1)} r={r.toFixed(2)} />)}
+  </g>
+  <g class="pin" transform={`translate(${sx.toFixed(1)} ${sy.toFixed(1)})`}>
+    <circle class="pulse" r={r * 3} />
+    <circle class="pulse p2" r={r * 3} />
+    <circle class="core" r={r * 2.2} />
+  </g>
+  <g class="label" transform={`translate(${(sx + r * 5).toFixed(1)} ${(sy + r * 9).toFixed(1)})`}>
+    <rect x="0" y="-26" width="150" height="40" rx="12" />
+    <text x="14" y="-1">SBS · Sainte-Anne</text>
+  </g>
+</svg>
+
+<style>
+  .gp-dots {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .land circle {
+    fill: currentColor;
+    opacity: 0.32;
+  }
+  .core {
+    fill: #fff;
+  }
+  .pulse {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: gp-pulse 2.4s ease-out infinite;
+  }
+  .p2 {
+    animation-delay: 1.2s;
+  }
+  .label rect {
+    fill: #fff;
+  }
+  .label text {
+    font-family: var(--font);
+    font-size: 15px;
+    font-weight: 700;
+    fill: var(--primary);
+  }
+  @keyframes gp-pulse {
+    0% { scale: 0.6; opacity: 1; }
+    100% { scale: 3; opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pulse { animation: none; }
+  }
+</style>

@@ -1,0 +1,104 @@
+---
+import AboutMotion from './AboutMotion.astro'
+
+const points = [
+  'Plus de 20 ans d\'expérience en bureautique',
+  'Service client rapide et réactif',
+  'Garantie qualité sur tous les services'
+]
+---
+
+<section id="about" class="about">
+  <div class="container grid">
+    <div class="content reveal">
+      <span class="eyebrow">Pourquoi SBS</span>
+      <h2 class="section-title">Pourquoi choisir <span>Sainte-Anne Bureautique Services</span> ?</h2>
+      <ul>
+        {points.map((p) => (
+          <li>
+            <span class="check" aria-hidden="true">✓</span>
+            {p}
+          </li>
+        ))}
+      </ul>
+      <p class="intro">
+        Nous sommes le spécialiste de la bureautique en Guadeloupe. Depuis plus de 20 ans, nous accompagnons les entreprises et particuliers dans leurs besoins en copies, impression, réparation informatique et services administratifs.
+      </p>
+      <a href="#contact" class="btn btn-primary">En savoir plus</a>
+    </div>
+    <div class="visual reveal" style="--delay: 120ms">
+      <AboutMotion />
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    background: var(--light);
+    overflow: hidden;
+    position: relative;
+  }
+  .grid {
+    display: grid;
+    align-items: center;
+    gap: 48px;
+    padding-block: 80px;
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+  }
+  h2 {
+    max-width: 540px;
+  }
+  .content {
+    gap: 22px;
+  }
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  li {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 18px;
+    color: var(--text);
+  }
+  .check {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    font-weight: bold;
+    flex-shrink: 0;
+    font-size: 16px;
+  }
+  .intro {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--text);
+    max-width: 540px;
+  }
+  .visual {
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (min-width: 992px) {
+    .grid {
+      grid-template-columns: 1fr 1fr;
+      min-height: 560px;
+      padding-block: 96px;
+    }
+    .content {
+      padding-left: 40px;
+    }
+  }
+</style>

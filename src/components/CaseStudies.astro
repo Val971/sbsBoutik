@@ -1,0 +1,153 @@
+---
+const cases = [
+  { icon: 'printer', stat: '500+', label: 'impressions par jour', title: 'Solutions d\'impression professionnelle', desc: 'Nos clients bénéficient de services d\'impression rapides et de qualité professionnelle pour tous leurs besoins bureautiques.' },
+  { icon: 'computer', stat: '100+', label: 'réparations réussies', title: 'Service de réparation informatique', desc: 'Nos techniciens expérimentés réparent tous types d\'ordinateurs et d\'équipements informatiques en Guadeloupe.' },
+  { icon: 'document', stat: '1000+', label: 'clients fidèles', title: 'Services de secrétariat complets', desc: 'Nous offrons des services de dactylographie, rédaction de CV, lettres et invitations pour les professionnels et entreprises.' },
+]
+
+const svg = (body) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`
+
+const getIconSVG = (type) => {
+  const icons = {
+    printer: svg('<path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8" rx="1"/><path d="M18 12h.01"/>'),
+    computer: svg('<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><circle cx="12" cy="10" r="2.2"/><path d="M12 6.3v1.5M12 12.2v1.5M8.3 10h1.5M14.2 10h1.5"/>'),
+    document: svg('<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/>'),
+  }
+  return icons[type]
+}
+---
+
+<section id="cases" class="cases">
+  <div class="container">
+    <div class="head reveal">
+      <div>
+        <span class="eyebrow">Nos chiffres</span>
+        <h2 class="section-title">Nos réalisations <span>et expertises</span></h2>
+      </div>
+      <a href="#services" class="btn btn-light btn-sm">Tous nos services</a>
+    </div>
+    <div class="grid">
+      {cases.map((c, i) => (
+        <article class="card reveal" style={`--delay: ${i * 100}ms`}>
+          <div class="icon-badge" set:html={getIconSVG(c.icon)}></div>
+          <p class="stat"><strong>{c.stat}</strong><span>{c.label}</span></p>
+          <h3>{c.title}</h3>
+          <p class="text">{c.desc}</p>
+          <a href="#contact" class="read">Découvrir <span aria-hidden="true">→</span><span class="sr-only"> {c.title}</span></a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .cases {
+    padding-block: 96px;
+    background: var(--white);
+  }
+  .head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+  .head .eyebrow {
+    margin-bottom: 16px;
+  }
+  .grid {
+    display: grid;
+    gap: 24px;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 36px 32px 40px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow);
+  }
+  .icon-badge {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--grad-primary);
+    border-radius: 18px;
+    margin-bottom: 16px;
+    color: var(--white);
+    box-shadow: 0 10px 24px rgba(196, 30, 58, 0.28);
+    transition: transform 0.3s ease;
+  }
+  .card:hover .icon-badge {
+    transform: rotate(-6deg) scale(1.06);
+  }
+  .icon-badge :global(svg) {
+    width: 30px;
+    height: 30px;
+  }
+  .stat {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    color: var(--primary);
+  }
+  .stat strong {
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .stat span {
+    font-size: 14px;
+    color: var(--muted);
+  }
+  h3 {
+    font-size: 22px;
+    line-height: 1.25;
+    margin-top: 4px;
+  }
+  .text {
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--text);
+  }
+  .read {
+    display: inline-flex;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 8px;
+    color: var(--primary);
+    font-weight: 600;
+    transition: gap 0.2s ease;
+  }
+  .card:hover .read {
+    gap: 10px;
+  }
+
+  @media (min-width: 768px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1100px) {
+    .cases {
+      padding-block: 120px;
+    }
+    .grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+  }
+</style>

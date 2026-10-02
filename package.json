@@ -1,0 +1,19 @@
+{
+  "name": "consult-me",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.3.4",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "devDependencies": {
+    "@types/node": "^24",
+    "typescript": "5.7.3"
+  },
+  "dependencies": {
+    "astro": "^7.3.5"
+  }
+}

@@ -1,0 +1,40 @@
+---
+interface Props {
+  tone?: 'default' | 'white'
+}
+const { tone = 'default' } = Astro.props
+---
+
+<div class:list={['shapes', tone]} aria-hidden="true">
+  <span class="q left"></span>
+  <span class="dot"></span>
+  <span class="q right"></span>
+</div>
+
+<style>
+  .shapes {
+    display: inline-flex;
+    gap: 4px;
+  }
+  .shapes span {
+    width: 28px;
+    height: 28px;
+    background: var(--primary);
+  }
+  .q.left {
+    border-top-left-radius: 28px;
+  }
+  .q.right {
+    border-top-right-radius: 28px;
+  }
+  .dot {
+    border-radius: 50%;
+    background: var(--dark) !important;
+  }
+  .white span {
+    background: var(--white);
+  }
+  .white .dot {
+    background: var(--lavender) !important;
+  }
+</style>

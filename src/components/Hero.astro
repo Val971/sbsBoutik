@@ -1,0 +1,175 @@
+---
+import HeroMotion from './HeroMotion.astro'
+---
+
+<section class="hero">
+  <div class="blob" aria-hidden="true"></div>
+  <div class="container hero-grid">
+    <div class="hero-content reveal">
+      <span class="eyebrow">Sainte-Anne · Guadeloupe</span>
+      <h1>Votre partenaire <span>bureautique</span> de confiance en Guadeloupe</h1>
+      <p class="lead">
+        SBS vous offre bien plus qu'une simple bureautique ! Copies, impression, réparation informatique, services financiers avec Point Nickel et YEM Pay, cyber-services... Tout ce qu'il faut pour vos besoins quotidiens en un seul endroit.
+      </p>
+      <div class="actions">
+        <a href="#contact" class="btn btn-primary">Nous contacter</a>
+        <a href="#services" class="link">Découvrir tous nos services</a>
+      </div>
+    </div>
+
+    <div class="hero-image reveal" style="--delay: 150ms">
+      <HeroMotion />
+    </div>
+  </div>
+
+  <div class="container partners">
+    <p>Disponible en boutique</p>
+    <ul class="partners-list">
+      <li>
+        <a href="#partenaire-nickel" class="partner partner-nickel">
+          <img src="/images/partners/nickel-logo.png" alt="Nickel" width="44" height="44" />
+          <span><strong>Point Nickel</strong><small>Compte pour tous</small></span>
+        </a>
+      </li>
+      <li>
+        <a href="#partenaire-yempay" class="partner partner-yempay">
+          <img src="/images/partners/yempay-logo-crop.jpg" alt="YEM Pay" width="104" height="44" />
+          <span><strong>YEM Pay</strong><small>Paiement mobile</small></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding-block: 48px 64px;
+  }
+  .blob {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 36%;
+    height: 60%;
+    background: var(--primary);
+    border-bottom-left-radius: 100% 90%;
+    border-top-left-radius: 0;
+  }
+  .hero-grid {
+    position: relative;
+    display: grid;
+    gap: 48px;
+    align-items: center;
+  }
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  h1 {
+    font-size: clamp(40px, 5.2vw, 70px);
+    line-height: 1.08;
+    color: var(--dark);
+  }
+  h1 span {
+    color: var(--primary);
+  }
+  .lead {
+    max-width: 600px;
+    font-size: clamp(18px, 1.8vw, 24px);
+    line-height: 1.35;
+    color: var(--dark);
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 36px;
+    margin-top: 16px;
+  }
+  .hero-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline: 24px;
+  }
+  .hero-content .eyebrow {
+    align-self: flex-start;
+  }
+  .partners {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 16px 28px;
+    margin-top: 72px;
+  }
+  .partners p {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .partners-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+  }
+  .partner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 18px 8px 8px;
+    border-radius: 16px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .partner:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+  }
+  .partner img {
+    height: 44px;
+    width: auto;
+    border-radius: 10px;
+  }
+  .partner span {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+  .partner strong {
+    font-size: 14px;
+  }
+  .partner small {
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .partner-nickel:hover {
+    border-color: var(--nickel);
+  }
+  .partner-yempay:hover {
+    border-color: var(--yempay-gold-dark);
+  }
+
+  @media (min-width: 992px) {
+    .hero {
+      padding-block: 80px 96px;
+    }
+    .hero-grid {
+      grid-template-columns: 1fr 0.95fr;
+      gap: 64px;
+    }
+    .blob {
+      display: block;
+    }
+  }
+</style>

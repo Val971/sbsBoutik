@@ -1,0 +1,117 @@
+---
+import GuadeloupeDots from './GuadeloupeDots.astro'
+import { PHONE_DISPLAY, telHref, mailHref, whatsappHref, WHATSAPP_ICON } from '../config/contact'
+---
+
+<section class="cta">
+  <div class="container">
+    <div class="banner reveal">
+      <span class="ring r1" aria-hidden="true"></span>
+      <span class="ring r2" aria-hidden="true"></span>
+
+      <div class="copy">
+        <img class="logo" src="/logoSbs2020.png" alt="" width="64" height="64" />
+        <h2>Un projet, une question ?<br />Passez nous voir à Sainte-Anne.</h2>
+        <p>Copies, réparation, papeterie, Nickel ou YEM Pay : contactez-nous par téléphone, e-mail ou WhatsApp, notre équipe vous répond rapidement.</p>
+        <div class="actions">
+          <a href={telHref} class="btn btn-white">Appeler le {PHONE_DISPLAY}</a>
+          <a href={mailHref('Demande d\'information – SBS')} class="btn btn-ghost-white">Envoyer un e-mail</a>
+          <a href={whatsappHref('Bonjour SBS, je souhaite avoir des informations.')} target="_blank" rel="noopener" class="btn btn-wa">
+            <span set:html={WHATSAPP_ICON}></span>WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="map">
+        <GuadeloupeDots />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    padding-block: 96px;
+  }
+  .banner {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    display: grid;
+    gap: 40px;
+    padding: 48px 24px;
+    color: var(--white);
+    border-radius: 36px;
+    background:
+      radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.16), transparent 40%),
+      var(--grad-primary);
+    box-shadow: 0 40px 80px rgba(196, 30, 58, 0.3);
+  }
+  .ring {
+    position: absolute;
+    z-index: -1;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.12);
+  }
+  .r1 { width: 520px; height: 520px; right: -200px; top: -260px; }
+  .r2 { width: 340px; height: 340px; left: -160px; bottom: -200px; border-style: dashed; }
+
+  .copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .logo {
+    width: 64px;
+    height: 64px;
+    padding: 6px;
+    border-radius: 20px;
+    background: var(--white);
+    object-fit: contain;
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+  }
+  h2 {
+    font-size: clamp(30px, 3.6vw, 48px);
+    line-height: 1.12;
+    max-width: 560px;
+  }
+  p {
+    font-size: 18px;
+    line-height: 1.55;
+    max-width: 500px;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .btn-wa {
+    color: var(--white);
+    background: #25D366;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+  }
+  .btn-wa span {
+    display: grid;
+  }
+  .btn-wa:hover {
+    background: #1ebe5b;
+  }
+  .map {
+    color: var(--white);
+    max-width: 560px;
+    width: 100%;
+    justify-self: center;
+  }
+
+  @media (min-width: 992px) {
+    .banner {
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 48px;
+      padding: 72px 64px;
+    }
+  }
+</style>
