@@ -1,17 +1,24 @@
 ---
-import { whatsappHref, WHATSAPP_ICON } from '../config/contact'
+import { whatsappHref, WHATSAPP_ICON, CONTACT_TEXT } from '../config/contact'
+import { getLang } from '../i18n'
+
+const lang = getLang(Astro.currentLocale)
+const t = {
+  fr: { aria: 'Nous écrire sur WhatsApp', label: 'Écrivez-nous sur WhatsApp' },
+  en: { aria: 'Message us on WhatsApp', label: 'Message us on WhatsApp' },
+}[lang]
 ---
 
 <a
   class="wa-float"
-  href={whatsappHref('Bonjour SBS, je souhaite avoir des informations.')}
+  href={whatsappHref(CONTACT_TEXT[lang].waMessage)}
   target="_blank"
   rel="noopener"
-  aria-label="Nous écrire sur WhatsApp"
+  aria-label={t.aria}
 >
   <span class="wa-ping" aria-hidden="true"></span>
   <span class="wa-icon" set:html={WHATSAPP_ICON.replace('width="22" height="22"', 'width="30" height="30"')}></span>
-  <span class="wa-label">Écrivez-nous sur WhatsApp</span>
+  <span class="wa-label">{t.label}</span>
 </a>
 
 <style>

@@ -1,6 +1,24 @@
 ---
 import GuadeloupeDots from './GuadeloupeDots.astro'
-import { PHONE_DISPLAY, telHref, mailHref, whatsappHref, WHATSAPP_ICON } from '../config/contact'
+import { PHONE_DISPLAY, telHref, mailHref, whatsappHref, WHATSAPP_ICON, CONTACT_TEXT } from '../config/contact'
+import { getLang } from '../i18n'
+
+const lang = getLang(Astro.currentLocale)
+const msg = CONTACT_TEXT[lang]
+const t = {
+  fr: {
+    title: ['Un projet, une question ?', 'Passez nous voir à Sainte-Anne.'],
+    text: 'Copies, réparation, papeterie, Nickel ou YEM Pay : contactez-nous par téléphone, e-mail ou WhatsApp, notre équipe vous répond rapidement.',
+    call: `Appeler le ${PHONE_DISPLAY}`,
+    mail: 'Envoyer un e-mail',
+  },
+  en: {
+    title: ['A project, a question?', 'Come and see us in Sainte-Anne.'],
+    text: 'Copying, repairs, stationery, Nickel or YEM Pay: reach us by phone, email or WhatsApp and our team will get back to you quickly.',
+    call: `Call ${PHONE_DISPLAY}`,
+    mail: 'Send an email',
+  },
+}[lang]
 ---
 
 <section class="cta">
@@ -11,12 +29,12 @@ import { PHONE_DISPLAY, telHref, mailHref, whatsappHref, WHATSAPP_ICON } from '.
 
       <div class="copy">
         <img class="logo" src="/logoSbs2020.png" alt="" width="64" height="64" />
-        <h2>Un projet, une question ?<br />Passez nous voir à Sainte-Anne.</h2>
-        <p>Copies, réparation, papeterie, Nickel ou YEM Pay : contactez-nous par téléphone, e-mail ou WhatsApp, notre équipe vous répond rapidement.</p>
+        <h2>{t.title[0]}<br />{t.title[1]}</h2>
+        <p>{t.text}</p>
         <div class="actions">
-          <a href={telHref} class="btn btn-white">Appeler le {PHONE_DISPLAY}</a>
-          <a href={mailHref('Demande d\'information – SBS')} class="btn btn-ghost-white">Envoyer un e-mail</a>
-          <a href={whatsappHref('Bonjour SBS, je souhaite avoir des informations.')} target="_blank" rel="noopener" class="btn btn-wa">
+          <a href={telHref} class="btn btn-white">{t.call}</a>
+          <a href={mailHref(msg.mailSubject)} class="btn btn-ghost-white">{t.mail}</a>
+          <a href={whatsappHref(msg.waMessage)} target="_blank" rel="noopener" class="btn btn-wa">
             <span set:html={WHATSAPP_ICON}></span>WhatsApp
           </a>
         </div>

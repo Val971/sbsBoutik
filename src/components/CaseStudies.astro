@@ -1,9 +1,32 @@
 ---
-const cases = [
-  { icon: 'printer', stat: '500+', label: 'impressions par jour', title: 'Solutions d\'impression professionnelle', desc: 'Nos clients bénéficient de services d\'impression rapides et de qualité professionnelle pour tous leurs besoins bureautiques.' },
-  { icon: 'computer', stat: '100+', label: 'réparations réussies', title: 'Service de réparation informatique', desc: 'Nos techniciens expérimentés réparent tous types d\'ordinateurs et d\'équipements informatiques en Guadeloupe.' },
-  { icon: 'document', stat: '1000+', label: 'clients fidèles', title: 'Services de secrétariat complets', desc: 'Nous offrons des services de dactylographie, rédaction de CV, lettres et invitations pour les professionnels et entreprises.' },
-]
+import { getLang } from '../i18n'
+
+const lang = getLang(Astro.currentLocale)
+const t = {
+  fr: {
+    eyebrow: 'Nos chiffres',
+    title: ['Nos réalisations ', 'et expertises'],
+    all: 'Tous nos services',
+    more: 'Découvrir',
+    cases: [
+      ['printer', '500+', 'impressions par jour', 'Solutions d\'impression professionnelle', 'Nos clients bénéficient de services d\'impression rapides et de qualité professionnelle pour tous leurs besoins bureautiques.'],
+      ['computer', '100+', 'réparations réussies', 'Service de réparation informatique', 'Nos techniciens expérimentés réparent tous types d\'ordinateurs et d\'équipements informatiques en Guadeloupe.'],
+      ['document', '1000+', 'clients fidèles', 'Services de secrétariat complets', 'Nous offrons des services de dactylographie, rédaction de CV, lettres et invitations pour les professionnels et entreprises.'],
+    ],
+  },
+  en: {
+    eyebrow: 'Our numbers',
+    title: ['Our work ', 'and expertise'],
+    all: 'All our services',
+    more: 'Learn more',
+    cases: [
+      ['printer', '500+', 'prints per day', 'Professional printing solutions', 'Our customers enjoy fast, professional-quality printing for all their office needs.'],
+      ['computer', '100+', 'successful repairs', 'Computer repair service', 'Our experienced technicians repair all kinds of computers and IT equipment in Guadeloupe.'],
+      ['document', '1000+', 'loyal customers', 'Full secretarial services', 'We offer typing, CV writing, letters and invitations for individuals and businesses.'],
+    ],
+  },
+}[lang]
+const cases = t.cases.map(([icon, stat, label, title, desc]) => ({ icon, stat, label, title, desc }))
 
 const svg = (body) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`
 
@@ -21,10 +44,10 @@ const getIconSVG = (type) => {
   <div class="container">
     <div class="head reveal">
       <div>
-        <span class="eyebrow">Nos chiffres</span>
-        <h2 class="section-title">Nos réalisations <span>et expertises</span></h2>
+        <span class="eyebrow">{t.eyebrow}</span>
+        <h2 class="section-title">{t.title[0]}<span>{t.title[1]}</span></h2>
       </div>
-      <a href="#services" class="btn btn-light btn-sm">Tous nos services</a>
+      <a href="#services" class="btn btn-light btn-sm">{t.all}</a>
     </div>
     <div class="grid">
       {cases.map((c, i) => (
@@ -33,7 +56,7 @@ const getIconSVG = (type) => {
           <p class="stat"><strong>{c.stat}</strong><span>{c.label}</span></p>
           <h3>{c.title}</h3>
           <p class="text">{c.desc}</p>
-          <a href="#contact" class="read">Découvrir <span aria-hidden="true">→</span><span class="sr-only"> {c.title}</span></a>
+          <a href="#contact" class="read">{t.more} <span aria-hidden="true">→</span><span class="sr-only"> {c.title}</span></a>
         </article>
       ))}
     </div>
@@ -43,7 +66,7 @@ const getIconSVG = (type) => {
 <style>
   .cases {
     padding-block: 96px;
-    background: var(--white);
+    background: var(--bg);
   }
   .head {
     display: flex;
@@ -65,7 +88,7 @@ const getIconSVG = (type) => {
     flex-direction: column;
     gap: 16px;
     padding: 36px 32px 40px;
-    background: var(--white);
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);

@@ -8,11 +8,14 @@ const brands = [
   { name: 'Epson', logo: '/images/brands/epson.png' },
 ]
 const loop = [...brands, ...brands]
+import { getLang } from '../i18n'
+const lang = getLang(Astro.currentLocale)
+const label = { fr: 'Nos partenaires et marques', en: 'Our partners and brands' }[lang]
 ---
 
 <section class="brands" aria-labelledby="brands-title">
   <div class="container">
-    <p id="brands-title" class="label">Nos partenaires et marques</p>
+    <p id="brands-title" class="label">{label}</p>
   </div>
   <div class="marquee">
     <ul class="track">
@@ -38,7 +41,7 @@ const loop = [...brands, ...brands]
 <style>
   .brands {
     padding-block: 40px 56px;
-    background: var(--white);
+    background: var(--bg);
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
   }
@@ -71,7 +74,7 @@ const loop = [...brands, ...brands]
     height: 76px;
     padding: 0 28px;
     border-radius: var(--radius);
-    background: var(--light);
+    background: var(--brand-tile);
     border: 1px solid var(--border);
     transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
   }

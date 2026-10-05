@@ -1,59 +1,100 @@
 ---
+import { getLang } from '../i18n'
+
+const lang = getLang(Astro.currentLocale)
+const fr = lang === 'fr'
+const t = {
+  fr: {
+    eyebrow: 'Nos services',
+    title: ['Tout pour votre bureau, ', 'au même endroit'],
+    lead: 'De la simple copie aux services de secrétariat, en passant par Nickel et YEM Pay : Sainte-Anne Bureautique Services est votre partenaire du quotidien en Guadeloupe.',
+    contact: 'Nous contacter',
+    discover: 'Découvrir',
+  },
+  en: {
+    eyebrow: 'Our services',
+    title: ['Everything for your office, ', 'in one place'],
+    lead: 'From simple copies to secretarial services, plus Nickel and YEM Pay: Sainte-Anne Bureautique Services is your everyday partner in Guadeloupe.',
+    contact: 'Contact us',
+    discover: 'Learn more',
+  },
+}[lang]
+
 const services = [
   {
-    title: 'Copies & Impression',
+    title: fr ? 'Copies & Impression' : 'Copying & Printing',
     icon: 'copy',
-    description: 'Copies et impressions couleur ou noir & blanc, du format A4 au A3, avec un rendu professionnel pour tous vos documents.',
+    description: fr
+      ? 'Copies et impressions couleur ou noir & blanc, du format A4 au A3, avec un rendu professionnel pour tous vos documents.'
+      : 'Color or black & white copies and prints, from A4 to A3, with a professional finish for all your documents.',
     featured: true,
   },
   {
-    title: 'Réparation Ordinateurs',
+    title: fr ? 'Réparation Ordinateurs' : 'Computer Repair',
     icon: 'laptop',
-    description: 'Diagnostic et réparation de tous types d\'ordinateurs. Un service rapide et fiable pour remettre votre matériel en état.',
+    description: fr
+      ? 'Diagnostic et réparation de tous types d\'ordinateurs. Un service rapide et fiable pour remettre votre matériel en état.'
+      : 'Diagnosis and repair of all kinds of computers. A fast, reliable service to get your equipment working again.',
   },
   {
-    title: 'Vente Cartouches',
+    title: fr ? 'Vente Cartouches' : 'Ink Cartridges',
     icon: 'ink',
-    description: 'Large gamme de cartouches originales et compatibles pour toutes vos imprimantes, à prix compétitifs.',
+    description: fr
+      ? 'Large gamme de cartouches originales et compatibles pour toutes vos imprimantes, à prix compétitifs.'
+      : 'A wide range of original and compatible cartridges for all your printers, at competitive prices.',
   },
-{
-  title: "Vente d'ordinateurs et d'imprimantes",
-  icon: "printer",
-description: "Vente d'ordinateurs, de photocopieurs et d'imprimantes adaptés aux besoins des particuliers et des professionnels.",
-},
   {
-    title: 'Papeterie',
+    title: fr ? 'Vente d\'ordinateurs et d\'imprimantes' : 'Computers & Printers for Sale',
+    icon: 'printer',
+    description: fr
+      ? 'Vente d\'ordinateurs, de photocopieurs et d\'imprimantes adaptés aux besoins des particuliers et des professionnels.'
+      : 'Computers, photocopiers and printers suited to the needs of individuals and businesses.',
+  },
+  {
+    title: fr ? 'Papeterie' : 'Stationery',
     icon: 'paper',
-    description: 'Papier, enveloppes, classeurs, stylos et toutes les fournitures de bureau dont vous avez besoin.',
+    description: fr
+      ? 'Papier, enveloppes, classeurs, stylos et toutes les fournitures de bureau dont vous avez besoin.'
+      : 'Paper, envelopes, binders, pens and all the office supplies you need.',
   },
   {
-    title: 'Tampons Personnalisés',
+    title: fr ? 'Tampons Personnalisés' : 'Custom Rubber Stamps',
     icon: 'stamp',
-    description: 'Réalisation rapide de tampons sur mesure pour vos besoins professionnels et administratifs.',
+    description: fr
+      ? 'Réalisation rapide de tampons sur mesure pour vos besoins professionnels et administratifs.'
+      : 'Custom stamps made quickly for your business and administrative needs.',
   },
   {
-    title: 'Services Secrétariat',
+    title: fr ? 'Services Secrétariat' : 'Secretarial Services',
     icon: 'doc',
-    description: 'Dactylographie, rédaction de lettres, CV, invitations et accompagnement dans vos démarches administratives.',
+    description: fr
+      ? 'Dactylographie, rédaction de lettres, CV, invitations et accompagnement dans vos démarches administratives.'
+      : 'Typing, letters, CVs, invitations and help with your administrative paperwork.',
   },
   {
     title: 'Point Nickel',
     brand: 'nickel',
     logo: '/images/partners/nickel-logo.png',
     href: '#partenaire-nickel',
-    description: 'Ouverture de compte Nickel, dépôts et retraits d\'espèces directement dans notre boutique.',
+    description: fr
+      ? 'Ouverture de compte Nickel, dépôts et retraits d\'espèces directement dans notre boutique.'
+      : 'Open a Nickel account, deposit and withdraw cash right here in our store.',
   },
   {
-    title: 'Services Cyber',
+    title: fr ? 'Services Cyber' : 'Internet Services',
     icon: 'wifi',
-    description: 'Accès Internet, impression de documents en ligne et aide à vos démarches numériques.',
+    description: fr
+      ? 'Accès Internet, impression de documents en ligne et aide à vos démarches numériques.'
+      : 'Internet access, printing of online documents and help with your online formalities.',
   },
   {
     title: 'YEM Pay',
     brand: 'yempay',
     logo: '/images/partners/yempay-logo-crop.jpg',
     href: '#partenaire-yempay',
-    description: 'Paiement mobile YEM Pay : nous vous accompagnons pour vos opérations en toute sécurité.',
+    description: fr
+      ? 'Paiement mobile YEM Pay : nous vous accompagnons pour vos opérations en toute sécurité.'
+      : 'YEM Pay mobile payment: we help you complete your transactions securely.',
   },
 ]
 
@@ -77,12 +118,12 @@ const icons = {
   <div class="container">
     <div class="head">
       <div class="intro reveal">
-        <span class="eyebrow">Nos services</span>
-        <h2 class="section-title">Tout pour votre bureau, <span>au même endroit</span></h2>
+        <span class="eyebrow">{t.eyebrow}</span>
+        <h2 class="section-title">{t.title[0]}<span>{t.title[1]}</span></h2>
       </div>
       <div class="intro-side reveal" style="--delay: 100ms">
-        <p class="section-lead">De la simple copie aux services de secrétariat, en passant par Nickel et YEM Pay : Sainte-Anne Bureautique Services est votre partenaire du quotidien en Guadeloupe.</p>
-        <a href="#contact" class="btn btn-primary">Nous contacter</a>
+        <p class="section-lead">{t.lead}</p>
+        <a href="#contact" class="btn btn-primary">{t.contact}</a>
       </div>
     </div>
 
@@ -102,7 +143,7 @@ const icons = {
           </div>
           <p>{s.description}</p>
           <a href={s.href ?? '#contact'} class="read">
-            {s.brand ? 'Découvrir' : 'Nous contacter'}
+            {s.brand ? t.discover : t.contact}
             <span aria-hidden="true">→</span>
             <span class="sr-only"> – {s.title}</span>
           </a>
@@ -145,7 +186,7 @@ const icons = {
     flex-direction: column;
     gap: 18px;
     padding: 32px;
-    background: var(--white);
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);

@@ -1,0 +1,43 @@
+---
+import LegalLayout from '../../layouts/LegalLayout.astro'
+import { LEGAL } from '../../config/legal'
+import { EMAIL, mailHref } from '../../config/contact'
+---
+
+<LegalLayout
+  title="Privacy policy"
+  description="How Sainte-Anne Bureautique Services (SBS) handles your personal data and uses cookies on its website."
+>
+  <h2>Data controller</h2>
+  <p>{LEGAL.companyName}, {LEGAL.address ?? <span class="todo">address to be completed</span>}. For any question about your data: <a href={mailHref('Personal data')}>{EMAIL}</a>.</p>
+
+  <h2>The data we process</h2>
+  <p>This website has no forms and does not require you to create an account. We therefore do not collect any personal data directly on the website.</p>
+  <p>When you contact us by phone, email or WhatsApp, we use your contact details and the content of your message solely to reply to you and follow up on your request. This data is never sold or passed on to third parties.</p>
+  <ul>
+    <li><strong>Purpose:</strong> answering your requests and customer follow-up.</li>
+    <li><strong>Legal basis:</strong> our legitimate interest in replying to people who contact us, or taking pre-contractual steps at your request.</li>
+    <li><strong>Retention period:</strong> up to 3 years after our last exchange.</li>
+  </ul>
+
+  <h2>Third-party services</h2>
+  <p>Some external services may receive technical data (such as your IP address) when you use them:</p>
+  <ul>
+    <li><strong>Google Maps</strong>: the map only loads if you click “Show map”. Google may then set cookies and collect data under its own <a href="https://policies.google.com/privacy?hl=en" target="_blank" rel="noopener">privacy policy</a>.</li>
+    <li><strong>WhatsApp</strong> (Meta): if you message us on WhatsApp, the conversation is subject to <a href="https://www.whatsapp.com/legal/privacy-policy-eea" target="_blank" rel="noopener">WhatsApp's privacy policy</a>.</li>
+    <li><strong>Fontshare</strong>: the website's typeface is loaded from Fontshare's servers, which receive your IP address in order to display it.</li>
+    <li><strong>External links</strong> (Google reviews, Nickel, YEM Pay): by following them, you leave this website and are subject to those services' own rules.</li>
+  </ul>
+
+  <h2>Cookies</h2>
+  <p>This website does not set any analytics or advertising cookies. Only the Google Map, if you choose to show it, may set Google cookies.</p>
+  <p>The website's host may keep technical logs (IP address, date of visit) for security and operational purposes.</p>
+
+  <h2>Your rights</h2>
+  <p>Under the General Data Protection Regulation (GDPR) and the French Data Protection Act, you have the right to access, rectify, erase, object to, restrict and port your data.</p>
+  <p>To exercise these rights, email us at <a href={mailHref('Exercising my GDPR rights')}>{EMAIL}</a>. We will reply within one month.</p>
+  <p>If you believe your rights have not been respected, you may lodge a complaint with the <a href="https://www.cnil.fr/en" target="_blank" rel="noopener">CNIL</a> (the French data protection authority).</p>
+
+  <h2>Changes</h2>
+  <p>This policy may be updated. The date of the last update is shown at the top of this page. The French version of this page prevails in case of discrepancy.</p>
+</LegalLayout>

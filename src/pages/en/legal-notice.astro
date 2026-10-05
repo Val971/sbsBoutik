@@ -1,0 +1,52 @@
+---
+import LegalLayout from '../../layouts/LegalLayout.astro'
+import { LEGAL } from '../../config/legal'
+import { EMAIL, PHONE_INTL, telHref, mailHref } from '../../config/contact'
+import { PAGES } from '../../i18n'
+---
+
+<LegalLayout
+  title="Legal notice"
+  description="Legal notice for the Sainte-Anne Bureautique Services (SBS) website, Sainte-Anne, Guadeloupe."
+>
+  <h2>Website publisher</h2>
+  <dl>
+    <div><dt>Company name</dt><dd>{LEGAL.companyName}</dd></div>
+    <div><dt>Legal form</dt><dd>{LEGAL.legalForm?.en ?? <span class="todo">To be completed</span>}</dd></div>
+    <div><dt>Share capital</dt><dd>{LEGAL.capital?.en ?? <span class="todo">To be completed</span>}</dd></div>
+    <div><dt>Registered office</dt><dd>{LEGAL.address ?? <span class="todo">To be completed</span>}</dd></div>
+    <div><dt>SIRET</dt><dd>{LEGAL.siret ?? <span class="todo">To be completed</span>}</dd></div>
+    <div><dt>Trade register (RCS)</dt><dd>{LEGAL.rcs ?? <span class="todo">To be completed</span>}</dd></div>
+    <div><dt>EU VAT number</dt><dd>{LEGAL.vat ?? <span class="todo">To be completed</span>}</dd></div>
+    <div><dt>Phone</dt><dd><a href={telHref}>{PHONE_INTL}</a></dd></div>
+    <div><dt>Email</dt><dd><a href={mailHref()}>{EMAIL}</a></dd></div>
+  </dl>
+
+  <h2>Publication director</h2>
+  <p>{LEGAL.publicationDirector?.en ?? <span class="todo">To be completed</span>}</p>
+
+  <h2>Hosting</h2>
+  <dl>
+    <div><dt>Host</dt><dd>{LEGAL.host.name ?? <span class="todo">To be completed</span>}</dd></div>
+    <div><dt>Address</dt><dd>{LEGAL.host.addressEn ?? <span class="todo">To be completed</span>}</dd></div>
+    {LEGAL.host.phone && <div><dt>Phone</dt><dd>{LEGAL.host.phone}</dd></div>}
+    <div><dt>Contact</dt><dd><a href={`mailto:${LEGAL.host.email}`}>{LEGAL.host.email}</a> · <a href={LEGAL.host.website} target="_blank" rel="noopener">vercel.com</a></dd></div>
+  </dl>
+
+  <h2>Design and development</h2>
+  <p>Website designed and built by <a href="https://kaskod.fr" target="_blank" rel="noopener">Kaskod</a>.</p>
+
+  <h2>Intellectual property</h2>
+  <p>All content on this website (text, photographs, SBS logo, layout) is the property of {LEGAL.companyName}, unless stated otherwise. Any full or partial reproduction without prior permission is prohibited.</p>
+  <p>The Canon, Samsung, HP, Lenovo, Epson, Nickel and YEM Pay trademarks and logos belong to their respective owners. They are shown only to identify the products and services available in store.</p>
+
+  <h2>Liability</h2>
+  <p>The information published on this website (services, opening hours, contact details) is provided for guidance only and may change. {LEGAL.companyName} strives to keep it up to date but cannot be held liable for any error or omission.</p>
+  <p>This website contains links to third-party sites (Google Maps, WhatsApp, Nickel, YEM Pay…). {LEGAL.companyName} has no control over their content and accepts no responsibility for it.</p>
+
+  <h2>Personal data</h2>
+  <p>To find out how your data is handled, please read our <a href={PAGES.privacy.en}>privacy policy</a>.</p>
+
+  <h2>Governing law</h2>
+  <p>This legal notice is governed by French law. The French version of this page prevails in case of discrepancy.</p>
+</LegalLayout>

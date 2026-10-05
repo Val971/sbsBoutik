@@ -1,34 +1,61 @@
 ---
 import ContactCard from './ContactCard.astro'
 import { OPENING_HOURS } from '../config/contact'
+import { getLang, home, PAGES } from '../i18n'
+
+const lang = getLang(Astro.currentLocale)
+const fr = lang === 'fr'
+const t = {
+  fr: {
+    tagline: 'Votre partenaire bureautique en Guadeloupe',
+    footerNav: 'Pied de page',
+    hours: 'Horaires d\'ouverture',
+    closed: 'Fermé',
+    rights: 'Tous droits réservés.',
+    legal: 'Mentions légales',
+    privacy: 'Confidentialité',
+    inStore: 'Services disponibles en boutique',
+  },
+  en: {
+    tagline: 'Your office partner in Guadeloupe',
+    footerNav: 'Footer',
+    hours: 'Opening hours',
+    closed: 'Closed',
+    rights: 'All rights reserved.',
+    legal: 'Legal notice',
+    privacy: 'Privacy',
+    inStore: 'Services available in store',
+  },
+}[lang]
+const formatSlot = (s: string) => (fr ? s : s.replace(/(\d+)h(\d+)/g, '$1:$2'))
 
 const columns = [
   {
     title: 'Navigation',
     links: [
-      { label: 'Accueil', href: '#' },
-      { label: 'Services', href: '#services' },
-      { label: 'Nickel & YEM Pay', href: '#partenaires' },
-      { label: 'À propos', href: '#about' },
-      { label: 'Nous trouver', href: '#zone' },
+      { label: fr ? 'Accueil' : 'Home', href: home(lang) },
+      { label: 'Services', href: home(lang, 'services') },
+      { label: 'Nickel & YEM Pay', href: home(lang, 'partenaires') },
+      { label: fr ? 'À propos' : 'About', href: home(lang, 'about') },
+      { label: fr ? 'Nous trouver' : 'Find us', href: home(lang, 'zone') },
     ],
   },
   {
     title: 'Services',
     links: [
-      { label: 'Copies & Impression', href: '#services' },
-      { label: 'Réparation ordinateurs', href: '#services' },
-      { label: 'Cartouches & papeterie', href: '#services' },
-      { label: 'Tampons personnalisés', href: '#services' },
-      { label: 'Secrétariat & cyber', href: '#services' },
+      { label: fr ? 'Copies & Impression' : 'Copying & Printing', href: home(lang, 'services') },
+      { label: fr ? 'Réparation ordinateurs' : 'Computer repair', href: home(lang, 'services') },
+      { label: fr ? 'Cartouches & papeterie' : 'Ink & stationery', href: home(lang, 'services') },
+      { label: fr ? 'Tampons personnalisés' : 'Custom stamps', href: home(lang, 'services') },
+      { label: fr ? 'Secrétariat & cyber' : 'Secretarial & internet', href: home(lang, 'services') },
     ],
   },
   {
-    title: 'Services financiers',
+    title: fr ? 'Services financiers' : 'Financial services',
     links: [
-      { label: 'Point Nickel', href: '#partenaire-nickel' },
-      { label: 'YEM Pay', href: '#partenaire-yempay' },
-      { label: 'Nous contacter', href: '#contact' },
+      { label: 'Point Nickel', href: home(lang, 'partenaire-nickel') },
+      { label: 'YEM Pay', href: home(lang, 'partenaire-yempay') },
+      { label: fr ? 'Nous contacter' : 'Contact us', href: '#contact' },
     ],
   },
 ]
@@ -37,14 +64,14 @@ const columns = [
 <footer id="contact" class="footer">
   <div class="container top">
     <div class="brand-col">
-      <a href="/" class="brand">
+      <a href={home(lang)} class="brand">
         <img src="/logoSbs2020.png" alt="" width="56" height="56" />
         <span>
           <strong>Sainte-Anne Bureautique Services</strong>
-          <small>Votre partenaire bureautique en Guadeloupe</small>
+          <small>{t.tagline}</small>
         </span>
       </a>
-      <nav class="cols" aria-label="Pied de page">
+      <nav class="cols" aria-label={t.footerNav}>
         {columns.map((col) => (
           <div>
             <h2>{col.title}</h2>
@@ -55,12 +82,12 @@ const columns = [
         ))}
       </nav>
       <section class="hours" aria-labelledby="footer-hours">
-  <h2 id="footer-hours">Horaires d'ouverture</h2>
+  <h2 id="footer-hours">{t.hours}</h2>
   <dl>
     {OPENING_HOURS.map((h) => (
       <div class:list={['hours-row', { closed: h.slots.length === 0 }]}>
-        <dt>{h.days}</dt>
-        <dd>{h.slots.length ? h.slots.join(' · ') : 'Fermé'}</dd>
+        <dt>{h.days[lang]}</dt>
+        <dd>{h.slots.length ? h.slots.map(formatSlot).join(' · ') : t.closed}</dd>
       </div>
     ))}
   </dl>
@@ -73,16 +100,71 @@ const columns = [
   </div>
 
   <div class="container bottom">
-    <p>© {new Date().getFullYear()} Sainte-Anne Bureautique Services. Tous droits réservés.</p>
+    <p class="copyright">
+      © {new Date().getFullYear()} Sainte-Anne Bureautique Services. {t.rights}
+      <span class="legal-links">
+        <a href={PAGES.legal[lang]}>{t.legal}</a>
+        <span aria-hidden="true">·</span>
+        <a href={PAGES.privacy[lang]}>{t.privacy}</a>
+      </span>
+    </p>
     <p class="partners-note">
       <img src="/images/partners/nickel-logo.png" alt="Nickel" width="24" height="24" />
       <img src="/images/partners/yempay-logo-crop.jpg" alt="YEM Pay" width="56" height="24" />
-      Services disponibles en boutique
+      {t.inStore}
+    </p>
+    <p class="made-by">
+      Made with
+      <svg class="heart" width="16" height="16" viewBox="0 0 24 24" role="img" aria-label="love"><path fill="currentColor" d="M12 21s-7.5-4.6-10-9.4C.3 8.3 2.1 4 6.2 4c2.3 0 3.9 1.3 5.8 3.4C13.9 5.3 15.5 4 17.8 4 21.9 4 23.7 8.3 22 11.6 19.5 16.4 12 21 12 21z"/></svg>
+      by <a href="https://kaskod.fr" target="_blank" rel="noopener">Kaskod</a>
     </p>
   </div>
 </footer>
 
 <style>
+  .copyright {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+  }
+  .legal-links {
+    display: inline-flex;
+    gap: 8px;
+  }
+  .legal-links a {
+    color: var(--dark);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s ease;
+  }
+  .legal-links a:hover {
+    color: var(--primary);
+  }
+  .made-by {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .made-by a {
+    font-weight: 700;
+    color: var(--dark);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .made-by a:hover {
+    color: var(--primary);
+  }
+  .heart {
+    color: var(--primary);
+    animation: heartbeat 1.6s ease-in-out infinite;
+  }
+  @keyframes heartbeat {
+    0%, 40%, 100% { scale: 1; }
+    20% { scale: 1.25; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .heart { animation: none; }
+  }
   .footer {
     padding-top: 96px;
     background: var(--light);
@@ -154,7 +236,7 @@ const columns = [
   flex-direction: column;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  background: var(--white);
+  background: var(--surface);
   overflow: hidden;
 }
 .hours-row {
@@ -183,7 +265,7 @@ const columns = [
     display: flex;
     flex-direction: column;
     gap: 14px;
-    padding-block: 28px;
+    padding-block: 28px 100px;
     border-top: 1px solid var(--border);
     font-size: 14px;
     color: var(--muted);
@@ -205,8 +287,11 @@ const columns = [
     }
     .bottom {
       flex-direction: row;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
+      padding-block: 28px;
+      padding-right: 110px;
     }
   }
   @media (min-width: 1100px) {

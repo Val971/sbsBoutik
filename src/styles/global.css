@@ -30,6 +30,41 @@
 
   --container: 1280px;
   --font: 'Satoshi', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Surfaces & texts that switch with the theme */
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f6f7fa;
+  --border-strong: #d4d7e0;
+  --nav-bg: rgba(255, 255, 255, 0.82);
+  --glass: rgba(255, 255, 255, 0.94);
+  --brand-tile: var(--light);
+  --on-white: #16161c;
+
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --dark: #f1f1f5;
+  --text: #b8b9c6;
+  --muted: #8b8c9f;
+  --border: #2b2c36;
+  --border-strong: #3a3b47;
+  --light: #15161c;
+  --lavender: #262732;
+  --bg: #0f1015;
+  --surface: #1b1c23;
+  --surface-2: #23242d;
+  --nav-bg: rgba(15, 16, 21, 0.82);
+  --glass: rgba(27, 28, 35, 0.94);
+  --brand-tile: #eceef3;
+  --primary: #E0314F;
+  --primary-light: #F0627A;
+  --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.35);
+  --shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 30px 60px rgba(0, 0, 0, 0.55);
+
+  color-scheme: dark;
 }
 
 *,
@@ -39,7 +74,7 @@
 }
 
 html {
-  background: var(--white);
+  background: var(--bg);
   scroll-behavior: smooth;
   scroll-padding-top: 88px;
 }
@@ -50,8 +85,9 @@ body {
   font-size: 16px;
   line-height: 1.55;
   color: var(--dark);
-  background: var(--white);
+  background: var(--bg);
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 img {
@@ -145,6 +181,14 @@ ul {
   color: var(--white);
   background: rgba(255, 255, 255, 0.14);
 }
+:root[data-theme='dark'] img[src='/logoSbs2020.png'] {
+  background: var(--white);
+  border-radius: 50%;
+}
+:root[data-theme='dark'] .eyebrow:not(.on-dark) {
+  color: var(--primary-light);
+  background: rgba(224, 49, 79, 0.16);
+}
 
 .section-title {
   font-size: clamp(32px, 3.6vw, 48px);
@@ -152,6 +196,9 @@ ul {
 }
 .section-title span {
   color: var(--primary);
+}
+:root[data-theme='dark'] .section-title span {
+  color: var(--primary-light);
 }
 .section-lead {
   font-size: 18px;
@@ -207,7 +254,7 @@ ul {
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
 }
 .btn-white:hover {
-  background: var(--lavender);
+  background: #f1f2f6;
 }
 
 .btn-ghost-white {

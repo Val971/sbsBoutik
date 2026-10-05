@@ -8,11 +8,31 @@ const icons = {
   phone: svg('<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/><path d="M9 8h6M9 11h4"/>'),
 }
 
+import { getLang } from '../i18n'
+
+const lang = getLang(Astro.currentLocale)
+const t = {
+  fr: {
+    copy: ['Copies & Impression', 'Couleur · N&B · A3'],
+    repair: ['Réparation PC', 'Diagnostic rapide'],
+    nickel: ['Point Nickel', 'Compte pour tous'],
+    yem: ['YEM Pay', 'Paiement mobile'],
+    clients: 'clients satisfaits',
+  },
+  en: {
+    copy: ['Copying & Printing', 'Color · B&W · A3'],
+    repair: ['PC Repair', 'Quick diagnosis'],
+    nickel: ['Nickel', 'An account for everyone'],
+    yem: ['YEM Pay', 'Mobile payment'],
+    clients: 'happy customers',
+  },
+}[lang]
+
 const chips = [
-  { cls: 'chip-1', tone: 'red', icon: icons.print, title: 'Copies & Impression', sub: 'Couleur · N&B · A3' },
-  { cls: 'chip-2', tone: 'teal', icon: icons.repair, title: 'Réparation PC', sub: 'Diagnostic rapide' },
-  { cls: 'chip-3', tone: 'nickel', icon: icons.wallet, title: 'Point Nickel', sub: 'Compte pour tous' },
-  { cls: 'chip-4', tone: 'yem', icon: icons.phone, title: 'YEM Pay', sub: 'Paiement mobile' },
+  { cls: 'chip-1', tone: 'red', icon: icons.print, title: t.copy[0], sub: t.copy[1] },
+  { cls: 'chip-2', tone: 'teal', icon: icons.repair, title: t.repair[0], sub: t.repair[1] },
+  { cls: 'chip-3', tone: 'nickel', icon: icons.wallet, title: t.nickel[0], sub: t.nickel[1] },
+  { cls: 'chip-4', tone: 'yem', icon: icons.phone, title: t.yem[0], sub: t.yem[1] },
 ]
 ---
 
@@ -41,7 +61,7 @@ const chips = [
 
   <div class="hm-stat">
     <strong>500+</strong>
-    <small>clients satisfaits</small>
+    <small>{t.clients}</small>
   </div>
 </div>
 
@@ -116,7 +136,7 @@ const chips = [
     align-items: center;
     gap: 10px;
     padding: 10px 14px 10px 10px;
-    background: rgba(255, 255, 255, 0.94);
+    background: var(--glass);
     backdrop-filter: blur(8px);
     border-radius: 16px;
     box-shadow: 0 14px 34px rgba(26, 26, 26, 0.12);

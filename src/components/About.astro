@@ -1,18 +1,32 @@
 ---
 import AboutMotion from './AboutMotion.astro'
+import { getLang } from '../i18n'
 
-const points = [
-  'Plus de 20 ans d\'expérience en bureautique',
-  'Service client rapide et réactif',
-  'Garantie qualité sur tous les services'
-]
+const lang = getLang(Astro.currentLocale)
+const t = {
+  fr: {
+    eyebrow: 'Pourquoi SBS',
+    title: ['Pourquoi choisir ', 'Sainte-Anne Bureautique Services', ' ?'],
+    points: ['Plus de 30 ans d\'expérience en bureautique', 'Service client rapide et réactif', 'Garantie qualité sur tous les services'],
+    intro: 'Nous sommes le spécialiste de la bureautique en Guadeloupe. Depuis plus de 30 ans, nous accompagnons les entreprises et particuliers dans leurs besoins en copies, impression, réparation informatique et services administratifs.',
+    cta: 'En savoir plus',
+  },
+  en: {
+    eyebrow: 'Why SBS',
+    title: ['Why choose ', 'Sainte-Anne Bureautique Services', '?'],
+    points: ['Over 30 years of office expertise', 'Fast, responsive customer service', 'Quality guaranteed on every service'],
+    intro: 'We are the office specialist in Guadeloupe. For over 30 years, we have been helping businesses and individuals with copying, printing, computer repair and administrative services.',
+    cta: 'Learn more',
+  },
+}[lang]
+const points = t.points
 ---
 
 <section id="about" class="about">
   <div class="container grid">
     <div class="content reveal">
-      <span class="eyebrow">Pourquoi SBS</span>
-      <h2 class="section-title">Pourquoi choisir <span>Sainte-Anne Bureautique Services</span> ?</h2>
+      <span class="eyebrow">{t.eyebrow}</span>
+      <h2 class="section-title">{t.title[0]}<span>{t.title[1]}</span>{t.title[2]}</h2>
       <ul>
         {points.map((p) => (
           <li>
@@ -21,10 +35,8 @@ const points = [
           </li>
         ))}
       </ul>
-      <p class="intro">
-        Nous sommes le spécialiste de la bureautique en Guadeloupe. Depuis plus de 20 ans, nous accompagnons les entreprises et particuliers dans leurs besoins en copies, impression, réparation informatique et services administratifs.
-      </p>
-      <a href="#contact" class="btn btn-primary">En savoir plus</a>
+      <p class="intro">{t.intro}</p>
+      <a href="#contact" class="btn btn-primary">{t.cta}</a>
     </div>
     <div class="visual reveal" style="--delay: 120ms">
       <AboutMotion />

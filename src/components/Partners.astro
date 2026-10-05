@@ -3,40 +3,87 @@ const svg = (body, size = 18) => `<svg width="${size}" height="${size}" viewBox=
 const check = svg('<path d="M20 6 9 17l-5-5"/>', 13)
 const pin = svg('<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/>', 15)
 
-const nickelPerks = [
-  'Ouverture de compte en boutique',
-  'Carte bancaire et RIB remis sur place',
-  'Dépôts et retraits d\'espèces',
-]
-const yemPerks = [
-  'Aide à l\'installation de l\'application',
-  'Opérations accompagnées en boutique',
-  'Transactions sécurisées',
-]
+import { getLang } from '../i18n'
+
+const lang = getLang(Astro.currentLocale)
+const t = {
+  fr: {
+    eyebrow: 'Services financiers',
+    title: ['Nickel et YEM Pay, ', 'chez SBS'],
+    lead: 'À Sainte-Anne, notre équipe vous accueille pour vos opérations Nickel et YEM Pay, avec un conseiller à vos côtés.',
+    where: 'Boutique SBS, Sainte-Anne',
+    nickelAlt: 'Nickel – Compte pour tous',
+    nickelPill: 'Point Nickel à Sainte-Anne',
+    nickelTitle: ['Votre compte Nickel,', 'ouvert chez SBS'],
+    nickelDesc: 'Venez à la boutique pour ouvrir votre compte Nickel, déposer ou retirer des espèces et gérer votre carte. Simple, rapide, accompagné.',
+    nickelPerks: ['Ouverture de compte en boutique', 'Carte bancaire et RIB remis sur place', 'Dépôts et retraits d\'espèces'],
+    nickelCta: 'Ouvrir mon compte',
+    nb1: ['Compte pour tous', 'Ouvert en boutique'],
+    nb2: ['Dépôt d\'espèces', 'Au comptoir SBS'],
+    payLabel: 'Paiement',
+    payOk: 'Paiement validé',
+    yb1: ['100 % mobile', 'Depuis votre téléphone'],
+    qrAria: 'Payer SBS avec YEM Pay (ouvre la page de paiement)',
+    qrAlt: 'QR code de paiement YEM Pay de SBS',
+    qrScan: 'Scannez pour payer',
+    yemPill: 'Point YEM Pay à Sainte-Anne',
+    yemTitle: ['Payez et transférez', 'avec '],
+    yemDesc: 'SBS est votre point YEM Pay : nous vous aidons à installer l\'application, effectuer vos opérations et réaliser vos paiements en toute sécurité.',
+    yemPerks: ['Aide à l\'installation de l\'application', 'Opérations accompagnées en boutique', 'Transactions sécurisées'],
+    yemCta: 'En savoir plus',
+  },
+  en: {
+    eyebrow: 'Financial services',
+    title: ['Nickel and YEM Pay, ', 'at SBS'],
+    lead: 'In Sainte-Anne, our team welcomes you for your Nickel and YEM Pay transactions, with an advisor by your side.',
+    where: 'SBS store, Sainte-Anne',
+    nickelAlt: 'Nickel – An account for everyone',
+    nickelPill: 'Nickel point in Sainte-Anne',
+    nickelTitle: ['Your Nickel account,', 'opened at SBS'],
+    nickelDesc: 'Come to the store to open your Nickel account, deposit or withdraw cash and manage your card. Simple, quick, with help on hand.',
+    nickelPerks: ['Open your account in store', 'Bank card and IBAN handed over on the spot', 'Cash deposits and withdrawals'],
+    nickelCta: 'Open my account',
+    nb1: ['An account for everyone', 'Opened in store'],
+    nb2: ['Cash deposit', 'At the SBS counter'],
+    payLabel: 'Payment',
+    payOk: 'Payment approved',
+    yb1: ['100% mobile', 'From your phone'],
+    qrAria: 'Pay SBS with YEM Pay (opens the payment page)',
+    qrAlt: 'SBS YEM Pay payment QR code',
+    qrScan: 'Scan to pay',
+    yemPill: 'YEM Pay point in Sainte-Anne',
+    yemTitle: ['Pay and transfer', 'with '],
+    yemDesc: 'SBS is your YEM Pay point: we help you install the app, complete your transactions and make your payments securely.',
+    yemPerks: ['Help installing the app', 'Assisted transactions in store', 'Secure transactions'],
+    yemCta: 'Learn more',
+  },
+}[lang]
+const nickelPerks = t.nickelPerks
+const yemPerks = t.yemPerks
 const YEMPAY_PAY_URL = 'https://yempay.com/qrcode_pay.php?qr_token=9d1f085dd6234425f28c541338b510c2&mode=receive'
 ---
 
 <section id="partenaires" class="partners">
   <div class="container">
     <div class="head reveal">
-      <span class="eyebrow">Services financiers</span>
-      <h2 class="section-title">Nickel et YEM Pay, <span>chez SBS</span></h2>
-      <p class="section-lead">À Sainte-Anne, notre équipe vous accueille pour vos opérations Nickel et YEM Pay, avec un conseiller à vos côtés.</p>
+      <span class="eyebrow">{t.eyebrow}</span>
+      <h2 class="section-title">{t.title[0]}<span>{t.title[1]}</span></h2>
+      <p class="section-lead">{t.lead}</p>
     </div>
 
     <div class="bands">
     <article id="partenaire-nickel" class="band nickel reveal">
       <div class="band-content">
-        <img class="nickel-logo" src="/images/partners/nickel-logo.png" alt="Nickel – Compte pour tous" width="120" height="120" loading="lazy" />
-        <span class="pill">Point Nickel à Sainte-Anne</span>
-        <h3>Votre compte Nickel,<br />ouvert chez SBS</h3>
-        <p class="desc">Venez à la boutique pour ouvrir votre compte Nickel, déposer ou retirer des espèces et gérer votre carte. Simple, rapide, accompagné.</p>
+        <img class="nickel-logo" src="/images/partners/nickel-logo.png" alt={t.nickelAlt} width="120" height="120" loading="lazy" />
+        <span class="pill">{t.nickelPill}</span>
+        <h3>{t.nickelTitle[0]}<br />{t.nickelTitle[1]}</h3>
+        <p class="desc">{t.nickelDesc}</p>
         <ul class="perks">
           {nickelPerks.map((p) => <li><span class="tick" set:html={check}></span>{p}</li>)}
         </ul>
         <div class="actions">
-          <a href="#contact" class="btn nickel-btn">Ouvrir mon compte <span aria-hidden="true">→</span></a>
-          <span class="where"><span set:html={pin}></span>Boutique SBS, Sainte-Anne</span>
+          <a href="#contact" class="btn nickel-btn">{t.nickelCta} <span aria-hidden="true">→</span></a>
+          <span class="where"><span set:html={pin}></span>{t.where}</span>
         </div>
       </div>
 
@@ -48,11 +95,11 @@ const YEMPAY_PAY_URL = 'https://yempay.com/qrcode_pay.php?qr_token=9d1f085dd6234
         </div>
         <div class="float-badge nb-1">
           <span class="fb-icon orange" set:html={check}></span>
-          <span><strong>Compte pour tous</strong><small>Ouvert en boutique</small></span>
+          <span><strong>{t.nb1[0]}</strong><small>{t.nb1[1]}</small></span>
         </div>
         <div class="float-badge nb-2">
           <strong class="big">€</strong>
-          <span><strong>Dépôt d'espèces</strong><small>Au comptoir SBS</small></span>
+          <span><strong>{t.nb2[0]}</strong><small>{t.nb2[1]}</small></span>
         </div>
       </div>
     </article>
@@ -81,9 +128,9 @@ const YEMPAY_PAY_URL = 'https://yempay.com/qrcode_pay.php?qr_token=9d1f085dd6234
                 <path d="M25 35l7 9 7-9M32 44v14M26 48h12M26 53h12" stroke="url(#yemGold)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </div>
-            <span class="balance-label">Paiement</span>
-            <span class="balance">45,00 €</span>
-            <span class="toast"><span set:html={check}></span>Paiement validé</span>
+            <span class="balance-label">{t.payLabel}</span>
+            <span class="balance">{lang === 'fr' ? '45,00 €' : '€45.00'}</span>
+            <span class="toast"><span set:html={check}></span>{t.payOk}</span>
             <span class="row"></span>
             <span class="row short"></span>
           </div>
@@ -91,27 +138,27 @@ const YEMPAY_PAY_URL = 'https://yempay.com/qrcode_pay.php?qr_token=9d1f085dd6234
 
         <div class="float-badge yb-1">
           <span class="fb-icon gold" set:html={svg('<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/>', 18)}></span>
-          <span><strong>100 % mobile</strong><small>Depuis votre téléphone</small></span>
+          <span><strong>{t.yb1[0]}</strong><small>{t.yb1[1]}</small></span>
         </div>
       </div>
 
       <div class="band-content">
         <div class="yem-top">
           <img class="yem-logo" src="/images/partners/yempay-logo-crop.jpg" alt="YEM Pay" width="320" height="135" loading="lazy" />
-          <a class="yem-qr" href={YEMPAY_PAY_URL} target="_blank" rel="noopener" aria-label="Payer SBS avec YEM Pay (ouvre la page de paiement)">
-            <img src="/images/partners/yempay-qr.svg" alt="QR code de paiement YEM Pay de SBS" width="112" height="112" />
-            <span>Scannez pour payer</span>
+          <a class="yem-qr" href={YEMPAY_PAY_URL} target="_blank" rel="noopener" aria-label={t.qrAria}>
+            <img src="/images/partners/yempay-qr.svg" alt={t.qrAlt} width="112" height="112" />
+            <span>{t.qrScan}</span>
           </a>
         </div>
-        <span class="pill">Point YEM Pay à Sainte-Anne</span>
-        <h3>Payez et transférez<br />avec <span class="gold-text">YEM Pay</span></h3>
-        <p class="desc">SBS est votre point YEM Pay : nous vous aidons à installer l'application, effectuer vos opérations et réaliser vos paiements en toute sécurité.</p>
+        <span class="pill">{t.yemPill}</span>
+        <h3>{t.yemTitle[0]}<br />{t.yemTitle[1]}<span class="gold-text">YEM Pay</span></h3>
+        <p class="desc">{t.yemDesc}</p>
         <ul class="perks">
           {yemPerks.map((p) => <li><span class="tick" set:html={check}></span>{p}</li>)}
         </ul>
         <div class="actions">
-          <a href="#contact" class="btn yem-btn">En savoir plus <span aria-hidden="true">→</span></a>
-          <span class="where"><span set:html={pin}></span>Boutique SBS, Sainte-Anne</span>
+          <a href="#contact" class="btn yem-btn">{t.yemCta} <span aria-hidden="true">→</span></a>
+          <span class="where"><span set:html={pin}></span>{t.where}</span>
         </div>
       </div>
     </article>
@@ -122,7 +169,7 @@ const YEMPAY_PAY_URL = 'https://yempay.com/qrcode_pay.php?qr_token=9d1f085dd6234
 <style>
   .partners {
     padding-block: 96px;
-    background: var(--white);
+    background: var(--bg);
   }
   .head {
     display: flex;
@@ -227,7 +274,7 @@ const YEMPAY_PAY_URL = 'https://yempay.com/qrcode_pay.php?qr_token=9d1f085dd6234
     padding: 10px 16px 10px 10px;
     border-radius: 16px;
     background: var(--white);
-    color: var(--dark);
+    color: var(--on-white);
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
     white-space: nowrap;
     animation: bob 5s ease-in-out infinite;

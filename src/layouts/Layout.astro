@@ -1,23 +1,44 @@
 ---
 import '../styles/global.css'
+import { getLang, LANGS, PAGES, pageKeyFromPath } from '../i18n'
 
 interface Props {
   title?: string
   description?: string
 }
 
-const {
-  title = 'SBS | Sainte-Anne Bureautique Services – Guadeloupe',
-  description = 'Copies, impression, réparation informatique, papeterie, tampons, secrétariat, Point Nickel et YemPay à Sainte-Anne, Guadeloupe.',
-} = Astro.props
+const lang = getLang(Astro.currentLocale)
+const defaults = {
+  fr: {
+    title: 'SBS | Sainte-Anne Bureautique Services – Guadeloupe',
+    description: 'Copies, impression, réparation informatique, papeterie, tampons, secrétariat, Point Nickel et YEM Pay à Sainte-Anne, Guadeloupe.',
+  },
+  en: {
+    title: 'SBS | Sainte-Anne Bureautique Services – Guadeloupe',
+    description: 'Copying, printing, computer repair, stationery, rubber stamps, secretarial services, Nickel and YEM Pay in Sainte-Anne, Guadeloupe.',
+  },
+}[lang]
+const { title = defaults.title, description = defaults.description } = Astro.props
+const pageKey = pageKeyFromPath(Astro.url.pathname)
+const alternates = LANGS.map((l) => ({ lang: l, href: new URL(PAGES[pageKey][l], Astro.url).href }))
 ---
 
 <!doctype html>
-<html lang="fr">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {alternates.map((a) => <link rel="alternate" hreflang={a.lang} href={a.href} />)}
+    <link rel="alternate" hreflang="x-default" href={alternates[0].href} />
     <meta name="theme-color" content="#C41E3A" />
+    <script is:inline>
+      ;(() => {
+        let stored = null
+        try { stored = localStorage.getItem('theme') } catch (e) {}
+        const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        document.documentElement.dataset.theme = stored === 'dark' || stored === 'light' ? stored : system
+      })()
+    </script>
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" href="/logoSbs2020.png" type="image/png" />

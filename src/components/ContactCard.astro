@@ -1,5 +1,13 @@
 ---
-import { EMAIL, PHONE_INTL, MAPS_URL, telHref, mailHref, whatsappHref, WHATSAPP_ICON } from '../config/contact'
+import { EMAIL, PHONE_INTL, MAPS_URL, telHref, mailHref, whatsappHref, WHATSAPP_ICON, CONTACT_TEXT } from '../config/contact'
+import { getLang } from '../i18n'
+
+const lang = getLang(Astro.currentLocale)
+const msg = CONTACT_TEXT[lang]
+const t = {
+  fr: { phone: 'Téléphone', email: 'E-mail', wa: 'Écrivez-nous', store: 'Boutique', title: 'Contactez-nous', sub: 'Par téléphone, e-mail ou WhatsApp : on vous répond vite.', call: 'Appeler', mail: 'Envoyer un e-mail', follow: 'Suivez-nous' },
+  en: { phone: 'Phone', email: 'Email', wa: 'Message us', store: 'Store', title: 'Contact us', sub: 'By phone, email or WhatsApp: we reply fast.', call: 'Call', mail: 'Send an email', follow: 'Follow us' },
+}[lang]
 
 const svg = (body, size = 20) => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${body}</svg>`
 
@@ -12,10 +20,10 @@ const icons = {
 }
 
 const items = [
-  { icon: icons.phone, label: 'Téléphone', value: PHONE_INTL, href: telHref },
-  { icon: icons.mail, label: 'E-mail', value: EMAIL, href: mailHref('Demande d\'information – SBS') },
-  { icon: WHATSAPP_ICON, label: 'WhatsApp', value: 'Écrivez-nous', href: whatsappHref('Bonjour SBS, je souhaite avoir des informations.'), external: true, wa: true },
-  { icon: icons.pin, label: 'Boutique', value: 'Sainte-Anne, Guadeloupe', href: MAPS_URL, external: true },
+  { icon: icons.phone, label: t.phone, value: PHONE_INTL, href: telHref },
+  { icon: icons.mail, label: t.email, value: EMAIL, href: mailHref(msg.mailSubject) },
+  { icon: WHATSAPP_ICON, label: 'WhatsApp', value: t.wa, href: whatsappHref(msg.waMessage), external: true, wa: true },
+  { icon: icons.pin, label: t.store, value: 'Sainte-Anne, Guadeloupe', href: MAPS_URL, external: true },
 ]
 
 const socials = [
@@ -31,8 +39,8 @@ const socials = [
       <img src="/logoSbs2020.png" alt="" width="44" height="44" />
     </div>
     <div>
-      <h2>Contactez-nous</h2>
-      <p>Par téléphone, e-mail ou WhatsApp : on vous répond vite.</p>
+      <h2>{t.title}</h2>
+      <p>{t.sub}</p>
     </div>
   </div>
 
@@ -56,12 +64,12 @@ const socials = [
   </ul>
 
   <div class="cc-actions">
-    <a href={telHref} class="cc-btn cc-btn-primary">Appeler</a>
-    <a href={mailHref('Demande d\'information – SBS')} class="cc-btn cc-btn-ghost">Envoyer un e-mail</a>
+    <a href={telHref} class="cc-btn cc-btn-primary">{t.call}</a>
+    <a href={mailHref(msg.mailSubject)} class="cc-btn cc-btn-ghost">{t.mail}</a>
   </div>
 
   <div class="cc-foot">
-    <span>Suivez-nous</span>
+    <span>{t.follow}</span>
     <ul class="cc-socials">
       {socials.map((s) => (
         <li>

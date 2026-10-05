@@ -1,34 +1,48 @@
 ---
 const svg = (body) => `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`
 
-const steps = [
-  {
-    title: 'Contactez-nous',
-    time: 'Rapide',
-    icon: svg('<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>'),
-    text: 'Passez en boutique, appelez-nous, écrivez-nous par e-mail ou sur WhatsApp. Nous prenons le temps de comprendre votre besoin.',
+import { getLang } from '../i18n'
+
+const lang = getLang(Astro.currentLocale)
+const t = {
+  fr: {
+    eyebrow: 'Comment ça marche',
+    title: ['Un processus ', 'simple et rapide'],
+    lead: 'Trois étapes pour obtenir vos solutions bureautiques, sans prise de tête.',
+    cta: 'Nous contacter',
+    steps: [
+      ['Contactez-nous', 'Rapide', 'Passez en boutique, appelez-nous, écrivez-nous par e-mail ou sur WhatsApp. Nous prenons le temps de comprendre votre besoin.'],
+      ['Diagnostic & conseil', '24-48h', 'Nous analysons votre demande et vous conseillons la solution la plus adaptée, en toute transparence.'],
+      ['Réalisation & suivi', 'Selon service', 'Notre équipe réalise votre commande avec soin et dans les délais, avec un suivi personnalisé.'],
+    ],
   },
-  {
-    title: 'Diagnostic & conseil',
-    time: '24-48h',
-    icon: svg('<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>'),
-    text: 'Nous analysons votre demande et vous conseillons la solution la plus adaptée, en toute transparence.',
+  en: {
+    eyebrow: 'How it works',
+    title: ['A ', 'simple, fast process'],
+    lead: 'Three steps to get the office solutions you need, hassle-free.',
+    cta: 'Contact us',
+    steps: [
+      ['Get in touch', 'Quick', 'Drop by the store, call us, or write to us by email or WhatsApp. We take the time to understand what you need.'],
+      ['Diagnosis & advice', '24-48h', 'We look at your request and recommend the best-suited solution, with full transparency.'],
+      ['Delivery & follow-up', 'Depends on service', 'Our team completes your order carefully and on time, with personal follow-up.'],
+    ],
   },
-  {
-    title: 'Réalisation & suivi',
-    time: 'Selon service',
-    icon: svg('<path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/>'),
-    text: 'Notre équipe réalise votre commande avec soin et dans les délais, avec un suivi personnalisé.',
-  },
+}[lang]
+
+const icons = [
+  svg('<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>'),
+  svg('<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>'),
+  svg('<path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/>'),
 ]
+const steps = t.steps.map(([title, time, text], i) => ({ title, time, text, icon: icons[i] }))
 ---
 
 <section class="process">
   <div class="container">
     <header class="head reveal">
-      <span class="eyebrow">Comment ça marche</span>
-      <h2 class="section-title">Un processus <span>simple et rapide</span></h2>
-      <p class="section-lead">Trois étapes pour obtenir vos solutions bureautiques, sans prise de tête.</p>
+      <span class="eyebrow">{t.eyebrow}</span>
+      <h2 class="section-title">{t.title[0]}<span>{t.title[1]}</span></h2>
+      <p class="section-lead">{t.lead}</p>
     </header>
 
     <ol class="steps">
@@ -48,7 +62,7 @@ const steps = [
     </ol>
 
     <div class="cta reveal">
-      <a href="#contact" class="btn btn-primary">Nous contacter</a>
+      <a href="#contact" class="btn btn-primary">{t.cta}</a>
     </div>
   </div>
 </section>
@@ -81,7 +95,7 @@ const steps = [
     flex-direction: column;
     gap: 16px;
     padding: 28px;
-    background: var(--white);
+    background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);

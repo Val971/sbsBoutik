@@ -3,6 +3,8 @@ interface Props {
   step?: number
 }
 const { step = 0.0125 } = Astro.props
+import { getLang } from '../i18n'
+const mapLabel = { fr: 'Carte de la Guadeloupe – SBS à Sainte-Anne', en: 'Map of Guadeloupe – SBS in Sainte-Anne' }[getLang(Astro.currentLocale)]
 
 // Approximate coastlines as [longitude, latitude]
 const basseTerre = [
@@ -56,7 +58,7 @@ const height = (latMax - latMin) * scale
 const r = step * scale * 0.34
 ---
 
-<svg class="gp-dots" viewBox={`0 0 ${width} ${height}`} role="img" aria-label="Carte de la Guadeloupe – SBS à Sainte-Anne">
+<svg class="gp-dots" viewBox={`0 0 ${width} ${height}`} role="img" aria-label={mapLabel}>
   <g class="land">
     {dots.map(([x, y]) => <circle cx={x.toFixed(1)} cy={y.toFixed(1)} r={r.toFixed(2)} />)}
   </g>

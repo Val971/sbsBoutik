@@ -1,10 +1,43 @@
 ---
 import { MAPS_URL } from '../config/contact'
+import { getLang, PAGES } from '../i18n'
 
-const stats = [
-  { value: '500+', label: 'Clients en Guadeloupe' },
-  { value: '20+', label: 'Ans d\'expérience' },
-]
+const lang = getLang(Astro.currentLocale)
+const t = {
+  fr: {
+    photoAlt: 'Devanture de Sainte-Anne Bureautique Services : vitrine rouge et blanche, enseigne SBS 0590 88 27 27',
+    storeChip: 'Repérez notre vitrine rouge et blanche',
+    consentTitle: 'Voir la boutique sur la carte',
+    consentText: 'La carte est fournie par Google Maps, qui peut déposer des cookies.',
+    learnMore: 'En savoir plus',
+    showMap: 'Afficher la carte',
+    mapTitle: 'Carte Google Maps - Sainte-Anne Bureautique Services, Sainte-Anne, Guadeloupe',
+    badgeSub: 'Notre boutique, au cœur de la Grande-Terre',
+    directions: 'Itinéraire',
+    eyebrow: 'Nous trouver',
+    title: ['Au cœur de ', 'Sainte-Anne', ', au service de toute la Guadeloupe'],
+    text: 'Depuis plus de 30 ans, SBS accompagne les entreprises et particuliers de Guadeloupe dans leurs besoins bureautiques, services financiers et numériques. Nous sommes votre partenaire de confiance pour tous vos projets.',
+    stats: [['500+', 'Clients en Guadeloupe'], ['30+', 'Ans d\'expérience']],
+    cta: 'Découvrir nos services',
+  },
+  en: {
+    photoAlt: 'Sainte-Anne Bureautique Services storefront: red and white shop window, SBS sign 0590 88 27 27',
+    storeChip: 'Look for our red and white storefront',
+    consentTitle: 'See the store on the map',
+    consentText: 'The map is provided by Google Maps, which may set cookies.',
+    learnMore: 'Learn more',
+    showMap: 'Show map',
+    mapTitle: 'Google Map - Sainte-Anne Bureautique Services, Sainte-Anne, Guadeloupe',
+    badgeSub: 'Our store, in the heart of Grande-Terre',
+    directions: 'Directions',
+    eyebrow: 'Find us',
+    title: ['In the heart of ', 'Sainte-Anne', ', serving all of Guadeloupe'],
+    text: 'For over 30 years, SBS has been helping businesses and individuals in Guadeloupe with their office, financial and digital needs. We are your trusted partner for all your projects.',
+    stats: [['500+', 'Customers in Guadeloupe'], ['30+', 'Years of experience']],
+    cta: 'Explore our services',
+  },
+}[lang]
+const stats = t.stats.map(([value, label]) => ({ value, label }))
 ---
 
 <section id="zone" class="globe">
@@ -15,39 +48,50 @@ const stats = [
         src="/images/devanture-sbs-1200.webp"
         srcset="/images/devanture-sbs-700.webp 700w, /images/devanture-sbs-1200.webp 1200w"
         sizes="(min-width: 992px) 600px, 100vw"
-        alt="Devanture de Sainte-Anne Bureautique Services : vitrine rouge et blanche, enseigne SBS 0590 88 27 27"
+        alt={t.photoAlt}
         width="1200"
         height="477"
         loading="lazy"
       />
       <figcaption class="store-chip">
         <span class="store-dot" aria-hidden="true"></span>
-        Repérez notre vitrine rouge et blanche
+        {t.storeChip}
       </figcaption>
     </figure>
     <div class="map-wrap">
-      <iframe
-        class="map"
-        title="Carte Google Maps - Sainte-Anne Bureautique Services, Sainte-Anne, Guadeloupe"
-        src="https://www.google.com/maps?q=16.224742,-61.383377&z=16&output=embed"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        allowfullscreen
-      ></iframe>
+      <div class="map map-consent" data-map-consent>
+        <div class="consent-inner">
+          <span class="consent-pin" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </span>
+          <p class="consent-title">{t.consentTitle}</p>
+          <p class="consent-text">{t.consentText} <a href={PAGES.privacy[lang]}>{t.learnMore}</a></p>
+          <button type="button" class="btn btn-primary btn-sm" data-map-load>{t.showMap}</button>
+        </div>
+        <template>
+          <iframe
+            class="map"
+            title={t.mapTitle}
+            src="https://www.google.com/maps?q=16.224742,-61.383377&z=16&output=embed"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          ></iframe>
+        </template>
+      </div>
       <div class="map-badge">
         <img src="/logoSbs2020.png" alt="" width="40" height="40" />
         <div>
           <strong>SBS — Sainte-Anne</strong>
-          <span>Notre boutique, au cœur de la Grande-Terre</span>
+          <span>{t.badgeSub}</span>
         </div>
-        <a class="map-open" href={MAPS_URL} target="_blank" rel="noopener">Itinéraire ↗</a>
+        <a class="map-open" href={MAPS_URL} target="_blank" rel="noopener">{t.directions} ↗</a>
       </div>
     </div>
     </div>
     <div class="content reveal" style="--delay: 120ms">
-      <span class="eyebrow">Nous trouver</span>
-      <h2 class="section-title">Au cœur de <span>Sainte-Anne</span>, au service de toute la Guadeloupe</h2>
-      <p>Depuis plus de 20 ans, SBS accompagne les entreprises et particuliers de Guadeloupe dans leurs besoins bureautiques, services financiers et numériques. Nous sommes votre partenaire de confiance pour tous vos projets.</p>
+      <span class="eyebrow">{t.eyebrow}</span>
+      <h2 class="section-title">{t.title[0]}<span>{t.title[1]}</span>{t.title[2]}</h2>
+      <p>{t.text}</p>
       <dl class="stats">
         {stats.map((s) => (
           <div>
@@ -57,10 +101,19 @@ const stats = [
           </div>
         ))}
       </dl>
-      <a href="#services" class="btn btn-primary">Découvrir nos réalisations</a>
+      <a href="#services" class="btn btn-primary">{t.cta}</a>
     </div>
   </div>
 </section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-map-consent]').forEach((box) => {
+    box.querySelector('[data-map-load]')?.addEventListener('click', () => {
+      const tpl = box.querySelector('template')
+      if (tpl) box.replaceWith(tpl.content.cloneNode(true))
+    })
+  })
+</script>
 
 <style>
   .globe {
@@ -82,7 +135,7 @@ const stats = [
     margin: 0;
     overflow: hidden;
     border-radius: var(--radius-lg);
-    border: 6px solid var(--white);
+    border: 6px solid var(--surface);
     box-shadow: var(--shadow-lg);
   }
   .storefront img {
@@ -105,7 +158,7 @@ const stats = [
     padding: 8px 14px;
     font-size: 13px;
     font-weight: 600;
-    color: var(--dark);
+    color: var(--on-white);
     background: rgba(255, 255, 255, 0.95);
     border-radius: 999px;
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
@@ -123,16 +176,59 @@ const stats = [
     flex-direction: column;
     border-radius: var(--radius-lg);
     overflow: hidden;
-    background: var(--white);
+    background: var(--surface);
     box-shadow: var(--shadow-lg);
-    border: 6px solid var(--white);
+    border: 6px solid var(--surface);
   }
-  .map {
+  .map,
+  .map-wrap :global(iframe) {
     width: 100%;
     aspect-ratio: 4 / 3;
     border: 0;
     border-radius: 22px;
     display: block;
+  }
+  .map-consent {
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    text-align: center;
+    background:
+      radial-gradient(circle at 50% 40%, rgba(196, 30, 58, 0.08), transparent 60%),
+      repeating-linear-gradient(0deg, transparent 0 23px, rgba(27, 94, 117, 0.06) 23px 24px),
+      repeating-linear-gradient(90deg, transparent 0 23px, rgba(27, 94, 117, 0.06) 23px 24px),
+      var(--light);
+  }
+  .consent-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    max-width: 360px;
+  }
+  .consent-pin {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 18px;
+    color: var(--white);
+    background: var(--grad-primary);
+    box-shadow: 0 12px 24px rgba(196, 30, 58, 0.28);
+  }
+  .consent-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--dark);
+  }
+  .consent-text {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text);
+  }
+  .consent-text a {
+    color: var(--primary);
+    font-weight: 600;
   }
   .map-badge {
     display: flex;
@@ -169,7 +265,8 @@ const stats = [
     transform: translateY(-2px);
   }
   @media (max-width: 520px) {
-    .map {
+    .map,
+    .map-wrap :global(iframe) {
       aspect-ratio: 1 / 1;
     }
     .store-chip {
@@ -179,7 +276,8 @@ const stats = [
     }
   }
   @media (min-width: 992px) {
-    .map {
+    .map,
+    .map-wrap :global(iframe) {
       aspect-ratio: 16 / 9;
     }
   }

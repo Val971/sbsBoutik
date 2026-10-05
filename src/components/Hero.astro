@@ -1,5 +1,28 @@
 ---
 import HeroMotion from './HeroMotion.astro'
+import { getLang } from '../i18n'
+
+const lang = getLang(Astro.currentLocale)
+const t = {
+  fr: {
+    h1: ['Votre partenaire ', 'bureautique', ' de confiance en Guadeloupe'],
+    lead: 'SBS vous offre bien plus qu\'une simple bureautique ! Copies, impression, réparation informatique, services financiers avec Point Nickel et YEM Pay, cyber-services… Tout ce qu\'il faut pour vos besoins quotidiens en un seul endroit.',
+    contact: 'Nous contacter',
+    services: 'Découvrir tous nos services',
+    available: 'Disponible en boutique',
+    nickelSub: 'Compte pour tous',
+    yemSub: 'Paiement mobile',
+  },
+  en: {
+    h1: ['Your trusted ', 'office', ' partner in Guadeloupe'],
+    lead: 'SBS is so much more than an office supply store! Copying, printing, computer repair, financial services with Nickel and YEM Pay, internet services… Everything you need day to day, all in one place.',
+    contact: 'Contact us',
+    services: 'Explore all our services',
+    available: 'Available in store',
+    nickelSub: 'An account for everyone',
+    yemSub: 'Mobile payment',
+  },
+}[lang]
 ---
 
 <section class="hero">
@@ -7,13 +30,11 @@ import HeroMotion from './HeroMotion.astro'
   <div class="container hero-grid">
     <div class="hero-content reveal">
       <span class="eyebrow">Sainte-Anne · Guadeloupe</span>
-      <h1>Votre partenaire <span>bureautique</span> de confiance en Guadeloupe</h1>
-      <p class="lead">
-        SBS vous offre bien plus qu'une simple bureautique ! Copies, impression, réparation informatique, services financiers avec Point Nickel et YEM Pay, cyber-services... Tout ce qu'il faut pour vos besoins quotidiens en un seul endroit.
-      </p>
+      <h1>{t.h1[0]}<span>{t.h1[1]}</span>{t.h1[2]}</h1>
+      <p class="lead">{t.lead}</p>
       <div class="actions">
-        <a href="#contact" class="btn btn-primary">Nous contacter</a>
-        <a href="#services" class="link">Découvrir tous nos services</a>
+        <a href="#contact" class="btn btn-primary">{t.contact}</a>
+        <a href="#services" class="link">{t.services}</a>
       </div>
     </div>
 
@@ -23,18 +44,18 @@ import HeroMotion from './HeroMotion.astro'
   </div>
 
   <div class="container partners">
-    <p>Disponible en boutique</p>
+    <p>{t.available}</p>
     <ul class="partners-list">
       <li>
         <a href="#partenaire-nickel" class="partner partner-nickel">
           <img src="/images/partners/nickel-logo.png" alt="Nickel" width="44" height="44" />
-          <span><strong>Point Nickel</strong><small>Compte pour tous</small></span>
+          <span><strong>Point Nickel</strong><small>{t.nickelSub}</small></span>
         </a>
       </li>
       <li>
         <a href="#partenaire-yempay" class="partner partner-yempay">
           <img src="/images/partners/yempay-logo-crop.jpg" alt="YEM Pay" width="104" height="44" />
-          <span><strong>YEM Pay</strong><small>Paiement mobile</small></span>
+          <span><strong>YEM Pay</strong><small>{t.yemSub}</small></span>
         </a>
       </li>
     </ul>
@@ -127,7 +148,7 @@ import HeroMotion from './HeroMotion.astro'
     gap: 12px;
     padding: 8px 18px 8px 8px;
     border-radius: 16px;
-    background: var(--white);
+    background: var(--surface);
     border: 1px solid var(--border);
     box-shadow: var(--shadow-sm);
     transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;

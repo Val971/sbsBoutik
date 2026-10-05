@@ -1,0 +1,43 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro'
+import { LEGAL } from '../config/legal'
+import { EMAIL, mailHref } from '../config/contact'
+---
+
+<LegalLayout
+  title="Politique de confidentialité"
+  description="Comment Sainte-Anne Bureautique Services (SBS) traite vos données personnelles et utilise les cookies sur son site."
+>
+  <h2>Responsable du traitement</h2>
+  <p>{LEGAL.companyName}, {LEGAL.address ?? <span class="todo">adresse à compléter</span>}. Pour toute question sur vos données : <a href={mailHref('Données personnelles')}>{EMAIL}</a>.</p>
+
+  <h2>Les données que nous traitons</h2>
+  <p>Ce site ne contient aucun formulaire et ne nécessite aucune création de compte. Nous ne collectons donc aucune donnée personnelle directement sur le site.</p>
+  <p>Lorsque vous nous contactez par téléphone, par e-mail ou par WhatsApp, nous utilisons vos coordonnées et le contenu de votre message uniquement pour vous répondre et assurer le suivi de votre demande. Ces données ne sont ni vendues ni cédées à des tiers.</p>
+  <ul>
+    <li><strong>Finalité :</strong> répondre à vos demandes et assurer le suivi client.</li>
+    <li><strong>Base légale :</strong> notre intérêt légitime à répondre aux personnes qui nous contactent, ou l'exécution de mesures précontractuelles à votre demande.</li>
+    <li><strong>Durée de conservation :</strong> 3 ans maximum après notre dernier échange.</li>
+  </ul>
+
+  <h2>Services tiers</h2>
+  <p>Certains services externes peuvent recevoir des données techniques (comme votre adresse IP) lorsque vous les utilisez :</p>
+  <ul>
+    <li><strong>Google Maps</strong> : la carte ne se charge que si vous cliquez sur « Afficher la carte ». Google peut alors déposer des cookies et collecter des données selon sa propre <a href="https://policies.google.com/privacy?hl=fr" target="_blank" rel="noopener">politique de confidentialité</a>.</li>
+    <li><strong>WhatsApp</strong> (Meta) : si vous nous écrivez via WhatsApp, l'échange est soumis à la <a href="https://www.whatsapp.com/legal/privacy-policy-eea?lang=fr" target="_blank" rel="noopener">politique de confidentialité de WhatsApp</a>.</li>
+    <li><strong>Fontshare</strong> : la police de caractères du site est chargée depuis les serveurs de Fontshare, qui reçoivent votre adresse IP pour l'affichage.</li>
+    <li><strong>Liens externes</strong> (avis Google, Nickel, YEM Pay) : en les suivant, vous quittez ce site et êtes soumis aux règles de ces services.</li>
+  </ul>
+
+  <h2>Cookies</h2>
+  <p>Ce site ne dépose aucun cookie de mesure d'audience ni de publicité. Seule la carte Google Maps, si vous choisissez de l'afficher, peut déposer des cookies Google.</p>
+  <p>L'hébergeur du site peut conserver des journaux techniques (adresse IP, date de visite) pour des raisons de sécurité et de bon fonctionnement.</p>
+
+  <h2>Vos droits</h2>
+  <p>Conformément au Règlement général sur la protection des données (RGPD) et à la loi Informatique et Libertés, vous disposez d'un droit d'accès, de rectification, d'effacement, d'opposition, de limitation et de portabilité de vos données.</p>
+  <p>Pour exercer ces droits, écrivez-nous à <a href={mailHref('Exercice de mes droits RGPD')}>{EMAIL}</a>. Nous vous répondrons dans un délai d'un mois.</p>
+  <p>Si vous estimez que vos droits ne sont pas respectés, vous pouvez adresser une réclamation à la <a href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener">CNIL</a>.</p>
+
+  <h2>Modifications</h2>
+  <p>Cette politique peut être mise à jour. La date de dernière mise à jour figure en haut de cette page.</p>
+</LegalLayout>

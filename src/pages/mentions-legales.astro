@@ -1,0 +1,51 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro'
+import { LEGAL } from '../config/legal'
+import { EMAIL, PHONE_INTL, telHref, mailHref } from '../config/contact'
+---
+
+<LegalLayout
+  title="Mentions légales"
+  description="Mentions légales du site de Sainte-Anne Bureautique Services (SBS), Sainte-Anne, Guadeloupe."
+>
+  <h2>Éditeur du site</h2>
+  <dl>
+    <div><dt>Raison sociale</dt><dd>{LEGAL.companyName}</dd></div>
+    <div><dt>Forme juridique</dt><dd>{LEGAL.legalForm?.fr ?? <span class="todo">À compléter</span>}</dd></div>
+    <div><dt>Capital social</dt><dd>{LEGAL.capital?.fr ?? <span class="todo">À compléter</span>}</dd></div>
+    <div><dt>Siège social</dt><dd>{LEGAL.address ?? <span class="todo">À compléter</span>}</dd></div>
+    <div><dt>SIRET</dt><dd>{LEGAL.siret ?? <span class="todo">À compléter</span>}</dd></div>
+    <div><dt>RCS</dt><dd>{LEGAL.rcs ?? <span class="todo">À compléter</span>}</dd></div>
+    <div><dt>TVA intracommunautaire</dt><dd>{LEGAL.vat ?? <span class="todo">À compléter</span>}</dd></div>
+    <div><dt>Téléphone</dt><dd><a href={telHref}>{PHONE_INTL}</a></dd></div>
+    <div><dt>E-mail</dt><dd><a href={mailHref()}>{EMAIL}</a></dd></div>
+  </dl>
+
+  <h2>Directeur de la publication</h2>
+  <p>{LEGAL.publicationDirector?.fr ?? <span class="todo">À compléter</span>}</p>
+
+  <h2>Hébergement</h2>
+  <dl>
+    <div><dt>Hébergeur</dt><dd>{LEGAL.host.name ?? <span class="todo">À compléter</span>}</dd></div>
+    <div><dt>Adresse</dt><dd>{LEGAL.host.address ?? <span class="todo">À compléter</span>}</dd></div>
+    {LEGAL.host.phone && <div><dt>Téléphone</dt><dd>{LEGAL.host.phone}</dd></div>}
+    <div><dt>Contact</dt><dd><a href={`mailto:${LEGAL.host.email}`}>{LEGAL.host.email}</a> · <a href={LEGAL.host.website} target="_blank" rel="noopener">vercel.com</a></dd></div>
+  </dl>
+
+  <h2>Conception et réalisation</h2>
+  <p>Site conçu et réalisé par <a href="https://kaskod.fr" target="_blank" rel="noopener">Kaskod</a>.</p>
+
+  <h2>Propriété intellectuelle</h2>
+  <p>L'ensemble des contenus de ce site (textes, photographies, logo SBS, mise en page) est la propriété de {LEGAL.companyName}, sauf mention contraire. Toute reproduction, totale ou partielle, sans autorisation préalable est interdite.</p>
+  <p>Les marques et logos Canon, Samsung, HP, Lenovo, Epson, Nickel et YEM Pay appartiennent à leurs propriétaires respectifs. Ils sont reproduits uniquement pour identifier les produits et services proposés en boutique.</p>
+
+  <h2>Responsabilité</h2>
+  <p>Les informations publiées sur ce site (services, horaires, coordonnées) sont fournies à titre indicatif et peuvent évoluer. {LEGAL.companyName} s'efforce de les tenir à jour mais ne saurait être tenue responsable d'une erreur ou d'une omission.</p>
+  <p>Ce site contient des liens vers des sites tiers (Google Maps, WhatsApp, Nickel, YEM Pay…). {LEGAL.companyName} n'exerce aucun contrôle sur leur contenu et décline toute responsabilité à leur égard.</p>
+
+  <h2>Données personnelles</h2>
+  <p>Pour savoir comment vos données sont traitées, consultez notre <a href="/confidentialite">politique de confidentialité</a>.</p>
+
+  <h2>Droit applicable</h2>
+  <p>Les présentes mentions légales sont régies par le droit français.</p>
+</LegalLayout>
