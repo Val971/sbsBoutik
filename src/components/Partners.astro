@@ -13,6 +13,7 @@ const yemPerks = [
   'Opérations accompagnées en boutique',
   'Transactions sécurisées',
 ]
+const YEMPAY_PAY_URL = 'https://yempay.com/qrcode_pay.php?qr_token=9d1f085dd6234425f28c541338b510c2&mode=receive'
 ---
 
 <section id="partenaires" class="partners">
@@ -95,7 +96,13 @@ const yemPerks = [
       </div>
 
       <div class="band-content">
-        <img class="yem-logo" src="/images/partners/yempay-logo-crop.jpg" alt="YEM Pay" width="320" height="135" loading="lazy" />
+        <div class="yem-top">
+          <img class="yem-logo" src="/images/partners/yempay-logo-crop.jpg" alt="YEM Pay" width="320" height="135" loading="lazy" />
+          <a class="yem-qr" href={YEMPAY_PAY_URL} target="_blank" rel="noopener" aria-label="Payer SBS avec YEM Pay (ouvre la page de paiement)">
+            <img src="/images/partners/yempay-qr.svg" alt="QR code de paiement YEM Pay de SBS" width="112" height="112" />
+            <span>Scannez pour payer</span>
+          </a>
+        </div>
         <span class="pill">Point YEM Pay à Sainte-Anne</span>
         <h3>Payez et transférez<br />avec <span class="gold-text">YEM Pay</span></h3>
         <p class="desc">SBS est votre point YEM Pay : nous vous aidons à installer l'application, effectuer vos opérations et réaliser vos paiements en toute sécurité.</p>
@@ -328,10 +335,50 @@ const yemPerks = [
     color: var(--white);
     box-shadow: 0 40px 80px rgba(25, 26, 46, 0.35);
   }
+  .yem-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+  }
   .yem-logo {
-    width: 220px;
+    width: min(220px, 52%);
     height: auto;
     border-radius: 14px;
+  }
+  .yem-qr {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 8px 6px;
+    border-radius: 16px;
+    background: var(--white);
+    border: 2px solid var(--yempay-gold);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.3), 0 0 0 6px rgba(255, 194, 26, 0.15);
+    transition: transform 0.25s ease;
+  }
+  .yem-qr:hover {
+    transform: translateY(-3px) rotate(-2deg);
+  }
+  .yem-qr img {
+    width: 112px;
+    height: 112px;
+    border-radius: 6px;
+  }
+  .yem-qr span {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--yempay-bg);
+    white-space: nowrap;
+  }
+  @media (max-width: 420px) {
+    .yem-qr img {
+      width: 92px;
+      height: 92px;
+    }
   }
   .yempay .pill {
     color: var(--yempay-bg);
