@@ -3,7 +3,7 @@ export const PHONE_DISPLAY = '0590 88 27 27'
 export const PHONE_INTL = '+590 590 88 27 27'
 export const PHONE_TEL = '+590590882727'
 // Numéro WhatsApp au format international, sans "+" ni espaces.
-export const WHATSAPP_NUMBER = '590590882727'
+export const WHATSAPP_NUMBER = '590690755466'
 export const MAPS_URL = 'https://maps.app.goo.gl/qWAmHhvGx7LjPs647'
 // Remplacer par le lien exact de la fiche Google Business (bouton "Partager" de la fiche).
 export const GOOGLE_REVIEWS_URL = 'https://www.google.com/maps/search/?api=1&query=Sainte-Anne+Bureautique+Services+Guadeloupe'
